@@ -491,3 +491,29 @@ Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
   - Confirmar `/linktree` funcione en producción.
   - Rotar token Cloudflare API y actualizar vault.
   - Opcional: ajustar CSP `worker-src` para Sentry Replay y revisar Cloudflare Insights bloqueado.
+
+## 2026-07-12 — Fix smoke test: health check liveness/readiness
+
+**Agente:** TRIN
+**Ambiente:** prod
+**Tareas:**
+- Investigar smoke test fallido en producción (`/api/health` devolvía `degraded`/`Unauthorized`).
+- Separar health check en liveness (`/api/health`) y readiness (`/api/health/ready`).
+- Build y typecheck local del backend exitosos.
+- Crear PR #44 en `laschubys-api`: `fix/health-liveness-readiness` → `develop`.
+- Actualizar rituales `KIMI-START-OF-DAY.md` y `KIMI-END-OF-DAY.md` con ambientes dev/prod, flujo Git y CI/CD.
+- Crear PR #1 en `alvarodevrace-workspace`: `docs/start-end-day-ambientes` → `develop`.
+**Commits:**
+- Back: `cafe3d3` (fix health liveness/readiness).
+- Workspace: `74def9d` (docs start/end-of-day).
+**PRs:** #44 ⏳ pendiente aprobación (back); #1 ⏳ pendiente aprobación (workspace).
+**Deploys:** N/A (aún no se mergea).
+**Smoke test:** ❌ falló por `Unauthorized` de Supabase en `/api/health`.
+**Bloqueos:**
+- `SUPABASE_SERVICE_ROLE_KEY` en producción retorna `Unauthorized`. Requiere revisar secret en Dokploy/Bitwarden.
+**Pendientes mañana:**
+- Aprobar y mergear PR #44 (back).
+- Aprobar y mergear PR #1 (workspace).
+- Revisar `SUPABASE_SERVICE_ROLE_KEY` en Dokploy con Bitwarden.
+- Verificar smoke test tras deploy.
+**Vault lint:** ✅ sin issues.
