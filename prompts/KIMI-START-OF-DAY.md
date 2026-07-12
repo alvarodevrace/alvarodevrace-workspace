@@ -44,8 +44,10 @@ Después de leer las fuentes de verdad, cargar skills globales del proyecto acti
   - `kimi-vault-lint` — si en la sesión anterior se editó el vault o si detectas inconsistencias.
   - `kimi-vault-ingest` — si hay dumps sin procesar en `vault/<proyecto>/temp/`.
 - Si trabajas con Angular → `kimi-angular-admin-demo-hardening`, `kimi-async-loading-fail-safe`, `kimi-mutation-idempotency-guard`, `kimi-playwright-e2e-angular`
-- Si trabajas con NestJS/Supabase → `kimi-supabase-types-sync`, `kimi-supabase-contract-verifier`, `kimi-nestjs-security-hardening`, `kimi-csrf-csp-hardening`
+- Si trabajas con NestJS/Supabase → `kimi-supabase-types-sync`, `kimi-supabase-contract-verifier`, `kimi-nestjs-senior`, `kimi-csrf-csp-hardening`
 - Si hay incidente/deploy → `kimi-sre-runbook`, `kimi-n8n-incident-router`
+- Si hay que revisar PRs abiertos, dependabot o CI/CD → reportar PRs de bots; no mergear sin aprobación de Álvaro
+- Si hay smoke tests fallando → `kimi-playwright-e2e-angular` + `kimi-sre-runbook`
 - Si hay tarea grande (auditoría, refactor, feature cross-layer) → **usar subagentes** (ver sección 6).
 - **Siempre que Álvaro diga que vamos a trabajar diseños, UI, UX, branding, landing, componentes visuales o mejorar la experiencia de usuario → invocar `ui-ux-pro-max` y sus sub-skills (`uupm-design`, `uupm-brand`, `uupm-ui-styling`) antes de actuar.**
 - **Siempre que la tarea sea arquitectura empresarial, planificación, diseño de sistemas, debugging, code review, TDD, o ejecución de planes complejos → invocar las skills de Superpowers (`brainstorming`, `writing-plans`, `subagent-driven-development`, `systematic-debugging`, `test-driven-development`, `verification-before-completion`).**
@@ -96,18 +98,39 @@ Antes de empezar a trabajar:
 
 ---
 
-## 5. ESTADO DE INFRAESTRUCTURA (si aplica)
+## 5. ESTADO DE INFRAESTRUCTURA Y DEPLOY (si aplica)
 
 Si el proyecto tiene deploy activo:
 
 1. Verificar estado en Dokploy (applicationStatus de la app). Los IDs están en `vault/INFRA-GLOBAL-2026-06.md`.
-2. Revisar si hay deploys pendientes o fallidos.
-3. Si hay incidente → activar skill `kimi-sre-runbook`.
+2. Revisar si hay deploys pendientes o fallidos en GitHub Actions y Dokploy.
+3. Si hay un merge reciente a `main`, confirmar que el **smoke test** pasó (`LasChubys-Front/e2e/smoke.spec.ts`).
+4. Si hay incidente → activar skill `kimi-sre-runbook`.
 
 Si hay infraestructura compartida (VPS, Supabase, n8n):
 - Los datos vivos están en `vault/INFRA-GLOBAL-2026-06.md`.
 - Si vas a tocar infra como código, revisa `/Users/alvarocarreramontalvo/Documents/Proyectos/Alvaro/infra/tofu/`.
 - Verifica `vault/infra/00-Index/INDEX.md` para estado global de infra.
+
+---
+
+## 5.1 AMBIENTES DEV/PROD Y FLUJO GIT
+
+Antes de tocar código, validar el ambiente objetivo:
+
+- **Siempre se trabaja en `develop`**. Nunca en `main`.
+- Las features nacen como ramas `feature/<nombre>` desde `develop`.
+- El flujo obligatorio es: `feature/*` → `develop` → `main`.
+- **Álvaro es el único approver**. Nada se mergea sin PR aprobado por él.
+- No pushes directos a `main` ni `develop`.
+- En el front:
+  - Ambiente `dev` → desarrollo normal.
+  - Ambiente `prod` → pantalla de "en construcción" activa hasta que se decida lanzar.
+- En el back:
+  - Local → `bun run start:dev`.
+  - Prod → `NODE_ENV=production` con variables de producción en Dokploy.
+
+Si detectas un PR de **dependabot** u otro bot → reportarlo. No mergear. Los únicos PRs válidos son los que creamos nosotros.
 
 ---
 
@@ -154,7 +177,8 @@ Si NO especifica agente → operas como **TRIN** (orquestadora / infra / CRM).
 Después de completar la secuencia anterior, responde con **máximo 5 líneas**:
 
 ```
-Proyecto: <nombre>. Estado: <ready|incidente|bloqueo>. Último log: <fecha — resumen>.
+Proyecto: <nombre>. Ambiente: <dev|prod>. Estado: <ready|incidente|bloqueo>.
+Último log: <fecha — resumen>. Deploy/smoke: <ok|fallido|N/A>.
 Skills activas: <lista corta>. Agente: <TRIN|PIXEL|LINK|EVA|NOVA|AURA>.
 ¿Empezamos por <sugerencia>?
 ```
