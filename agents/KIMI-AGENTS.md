@@ -154,10 +154,11 @@ TRIN:
   4. Solo si NOVA da ✅ y CI verde → Álvaro aprueba → merge a develop
   5. Eliminar rama feature remota y local
   6. gh pr create develop → main
-  7. Notificar a Álvaro: "PR listo → <url>"
-  8. Álvaro aprueba → merge → Dokploy deploy automático vía GitHub Actions
-  9. Verificar deploy success
-  10. Planka → mover ticket a Done
+  7. LLAMAR A NOVA: "QA en PR develop→main — proyecto <X> → <url>"
+  8. Solo si NOVA da ✅ y CI verde → notificar a Álvaro: "PR listo → <url>"
+  9. Álvaro aprueba → merge → Dokploy deploy automático vía GitHub Actions
+  10. Verificar deploy success
+  11. Planka → mover ticket a Done
 ```
 
 **Reglas:**
