@@ -34,9 +34,24 @@ Lee estos archivos **siempre**, sin excepción, antes de cualquier acción:
 
 ---
 
+## 1.5 MEMORIA PERSISTENTE — ENGRAM
+
+Después de leer las fuentes de verdad, **consultar Engram** si el proyecto tiene memorias previas:
+
+1. Si el usuario retoma una tarea o pregunta por algo de una sesión anterior → invocar `mcp__engram__mem_search` con el tema.
+2. Si hay una compactación de contexto reciente → pedir a Engram el resumen de la sesión anterior.
+3. Si vas a tomar una decisión arquitectónica o de infra → buscar en Engram si ya se discutió algo similar.
+
+Reglas de uso:
+- Engram es **memoria activa**, no fuente de verdad oficial. Si encuentras algo importante, confirma contra el vault.
+- No guardes en Engram secretos, IDs de infra ni decisiones finales. Eso va a Bitwarden o al vault.
+- Ver convenciones completas en `vault/alvarodevrace/20-Tech/decisions/2026-07-13-engram-conventions.md`.
+
+---
+
 ## 2. CARGA DE SKILLS RELEVANTES
 
-Después de leer las fuentes de verdad, cargar skills globales del proyecto activo:
+Después de leer las fuentes de verdad y consultar Engram, cargar skills globales del proyecto activo:
 
 - Lee `/Users/alvarocarreramontalvo/.kimi-code/skills/` — lista todos los `kimi-*.md` disponibles.
 - **Siempre invocar al inicio:**

@@ -107,10 +107,15 @@ TOKEN=$(curl -s -X POST "https://planka.alvarodevrace.tech/api/access-tokens" \
 ### Capas
 
 ```
-Capa 1 — Raw Sources:  vault/<proyecto>/temp/ (dumps de agentes — inmutables hasta EVA)
-Capa 2 — The Wiki:     vault/<proyecto>/20-Tech/ y 30-Product/ (EVA indexa)
-Capa 3 — The Schema:   agents/KIMI-AGENTS.md (este archivo)
+Capa 0 — Memoria activa: Engram MCP (SQLite local, memoria entre sesiones y compactaciones)
+Capa 1 — Raw Sources:    vault/<proyecto>/temp/ (dumps de agentes — inmutables hasta EVA)
+Capa 2 — The Wiki:       vault/<proyecto>/20-Tech/ y 30-Product/ (EVA indexa)
+Capa 3 — The Schema:     agents/KIMI-AGENTS.md (este archivo)
 ```
+
+**Engram** actúa como buffer de memoria a corto/mediano plazo. Todo lo importante debe migrar a vault; Engram no reemplaza al vault ni a Bitwarden.
+
+Ver convenciones en `vault/alvarodevrace/20-Tech/decisions/2026-07-13-engram-conventions.md`.
 
 ### Flujo de cierre (obligatorio)
 
