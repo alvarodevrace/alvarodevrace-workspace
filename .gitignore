@@ -1,0 +1,44 @@
+# Sub-repos managed independently (root-level only)
+/Las Chubys/LasChubys-Front/
+/Las Chubys/LasChubys-Back/
+/Portfolio/
+/infra/
+
+# Node / build artifacts
+node_modules/
+dist/
+.angular/
+.nest/
+.next/
+out/
+coverage/
+
+# Secrets and credentials
+.env
+.env.*
+!.env.example
+!.env.sample
+vault/*/40-Credentials/
+vault/INFRA-GLOBAL-2026-06.md
+system/MEMORY.md
+system/STATE.md
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary / processed
+vault/*/temp/
+.superpowers/sdd/

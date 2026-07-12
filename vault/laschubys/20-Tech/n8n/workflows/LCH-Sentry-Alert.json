@@ -1,0 +1,102 @@
+{
+  "name": "LCH / Sentry / Alert",
+  "nodes": [
+    {
+      "id": "lch-sentry-alert-webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        260,
+        300
+      ],
+      "webhookId": "lch-sentry-alert",
+      "parameters": {
+        "path": "lch-sentry-alert",
+        "httpMethod": "POST",
+        "responseMode": "onReceived"
+      }
+    },
+    {
+      "name": "Build Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        460,
+        300
+      ],
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const input = $input.first().json;\nconst body = input.body || input;\nconst issue = body.data?.issue || {};\nconst event = body.data?.event || {};\nconst project = issue.project || {};\n\nconst chat_id = $env.TELEGRAM_LCH_CHAT_ID;\nconst title = issue.title || 'Sin título';\nconst level = issue.level || 'unknown';\nconst projectSlug = project.slug || body.project_slug || body.project || 'laschubys';\nconst environment = event.environment || 'production';\nconst action = body.action || 'alert';\nconst url = issue.web_url || issue.permalink || issue.url || '';\nconst culprit = event.culprit || issue.culprit || '';\n\nconst text = `<b>🚨 Sentry — Las Chubys</b>\\n\\n<b>Issue:</b> ${title}\\n<b>Nivel:</b> ${level}\\n<b>Proyecto:</b> ${projectSlug}\\n<b>Ambiente:</b> ${environment}\\n<b>Acción:</b> ${action}\\n\\n<a href=\"${url}\">Ver en Sentry</a>\\n\\n<code>${culprit}</code>`;\n\nreturn [{ json: { chat_id, text } }];"
+      }
+    },
+    {
+      "name": "Send Telegram Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ \"https://api.telegram.org/bot\" + $env.TELEGRAM_LCH_BOT_TOKEN + \"/sendMessage\" }}",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "keypair",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "chat_id",
+              "value": "={{ $json.chat_id }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.text }}"
+            },
+            {
+              "name": "parse_mode",
+              "value": "HTML"
+            },
+            {
+              "name": "disable_web_page_preview",
+              "value": "=true"
+            }
+          ]
+        },
+        "options": {}
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Build Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Message": {
+      "main": [
+        [
+          {
+            "node": "Send Telegram Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "R8sYRPKvdNBKLEKX"
+  },
+  "staticData": null
+}
