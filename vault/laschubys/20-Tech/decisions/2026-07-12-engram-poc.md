@@ -41,7 +41,7 @@ Se evaluó Engram (https://github.com/Gentleman-Programming/engram) como sistema
 ## Problemas encontrados
 - `engram setup` no incluye Kimi Code; la configuración MCP debe hacerse a mano.
 - El nombre de proyecto que usa Engram se detecta desde el remote de git (`laschubys-app`), no desde el nombre de carpeta local (`LasChubys-Front`). Esto puede confundir si se espera que las memorias se agrupen por el nombre del directorio.
-- Kimi Code no consulta Engram de forma proactiva para preguntas que ya puede responder desde el contexto actual (`AGENTS.md`). Para forzar el uso de la memoria persistente hay que pedírselo explícitamente.
+- Kimi Code no consulta Engram de forma proactiva para preguntas que ya puede responder desde el contexto actual (`AGENTS.md`). Para forzar el uso de la memoria persistente hay que pedírselo explícitamente. Esto no invalida el objetivo del PoC: Engram funciona como memoria de respaldo para decisiones que no están en los archivos de contexto actuales o que se pierden tras compactación de sesión.
 
 ## Próximos pasos
 - Activar la misma configuración MCP en todos los proyectos de Las Chubys (la config global `~/.kimi-code/mcp.json` ya aplica, pero conviene documentarlo en el onboarding del equipo).
