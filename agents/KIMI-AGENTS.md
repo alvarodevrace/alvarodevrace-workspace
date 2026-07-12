@@ -149,11 +149,11 @@ PIXEL: rama feature/<ticket>-<nombre> → commits → build/test OK
 
 TRIN:
   1. gh run list --repo alvarodevrace/<repo>
-  2. gh pr create feature/<ticket>-<nombre> → develop
+  2. gh pr create --base develop --head feature/<ticket>-<nombre> --title "feat(scope): descripción"
   3. LLAMAR A NOVA: "QA en PR — proyecto <X> → <url>"
   4. Solo si NOVA da ✅ y CI verde → Álvaro aprueba → merge a develop
   5. Eliminar rama feature remota y local
-  6. gh pr create develop → main
+  6. gh pr create --base main --head develop --title "release: descripción"
   7. LLAMAR A NOVA: "QA en PR develop→main — proyecto <X> → <url>"
   8. Solo si NOVA da ✅ y CI verde → notificar a Álvaro: "PR listo → <url>"
   9. Álvaro aprueba → merge → Dokploy deploy automático vía GitHub Actions
@@ -189,7 +189,7 @@ TRIN:
 - PIXEL/LINK/NOVA/AURA: nunca Dokploy, secretos, Supabase schema.
 - AURA: nunca lógica de negocio, servicios, routing.
 - NOVA: nunca código productivo. Solo tests.
-- TRIN: llama a NOVA antes de PR develop→main.
+- TRIN: llama a NOVA antes de mergear a `develop` (PR feature→develop) y antes de PR develop→main.
 - PIXEL: pide componente a AURA antes de UI nuevo desde cero.
 
 ---

@@ -42,3 +42,8 @@ yarn-error.log*
 # Temporary / processed
 vault/*/temp/
 .superpowers/sdd/
+
+# Local agent config (per-environment; do not version credentials)
+.kimi-code/mcp.json
+.kimi-code/config.toml
+.kimi-code/settings.json
