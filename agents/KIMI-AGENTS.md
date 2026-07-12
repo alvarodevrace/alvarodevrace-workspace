@@ -143,26 +143,29 @@ Obligatorio antes de: migraciones DDL, cambios RLS, lógica de pagos, RPCs crít
 **Ramas permanentes:** `main` y `develop` — NUNCA push directo.
 
 ```
-PIXEL: rama pixel/<ticket> → commits → build OK → merge local a develop
-→ avisa a TRIN: "listo en develop local — rama: pixel/<nombre>."
+PIXEL: rama feature/<ticket>-<nombre> → commits → build/test OK
+→ push origin feature/<ticket>-<nombre>
+→ avisa a TRIN: "listo para PR — rama: feature/<ticket>-<nombre>."
 
 TRIN:
   1. gh run list --repo alvarodevrace/<repo>
-  2. git push origin develop
-  3. git branch -D pixel/<nombre> + git push origin --delete pixel/<nombre>
-  4. LLAMAR A NOVA: "QA listo en develop — proyecto <X>"
-  5. Solo si NOVA da ✅ → gh pr create develop → main
-  6. Notificar a Álvaro: "PR listo → <url>"
-  7. Álvaro aprueba → merge → Dokploy deploy automático vía GitHub Actions
-  8. Verificar deploy success
-  9. Planka → mover ticket a Done
+  2. gh pr create feature/<ticket>-<nombre> → develop
+  3. LLAMAR A NOVA: "QA en PR — proyecto <X> → <url>"
+  4. Solo si NOVA da ✅ y CI verde → Álvaro aprueba → merge a develop
+  5. Eliminar rama feature remota y local
+  6. gh pr create develop → main
+  7. Notificar a Álvaro: "PR listo → <url>"
+  8. Álvaro aprueba → merge → Dokploy deploy automático vía GitHub Actions
+  9. Verificar deploy success
+  10. Planka → mover ticket a Done
 ```
 
 **Reglas:**
-- NUNCA push directo a `main`
+- NUNCA push directo a `main` ni `develop`
+- NUNCA merge a `develop` sin QA pass de NOVA + CI verde
 - NUNCA PR feature → main (siempre develop primero)
-- TRIN nunca aprueba su propio PR
-- TRIN nunca crea PR sin QA pass de NOVA
+- TRIN nunca aprueba su propio PR; solo Álvaro aprueba
+- TRIN nunca crea PR develop→main sin QA pass de NOVA
 
 ---
 
