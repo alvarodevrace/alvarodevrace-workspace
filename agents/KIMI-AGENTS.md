@@ -122,8 +122,10 @@ Ver convenciones en `vault/alvarodevrace/20-Tech/decisions/2026-07-13-engram-con
 ```
 1. Crear dump: vault/<proyecto>/temp/YYYY-MM-DD-<AGENTE>.md
    Contenido: logros, IDs, cambios infra, decisiones, pendientes.
-2. Planka → comentar ticket + mover a Done si terminado.
-3. /clear → ÚLTIMO PASO.
+2. Engram → vault: revisar memorias de la sesión; migrar decisiones/bugs/workarounds
+   a vault/<proyecto>/20-Tech/decisions/ o 10-Log/LOG.md; borrar obsoletas.
+3. Planka → comentar ticket + mover a Done si terminado.
+4. /clear → ÚLTIMO PASO.
 ```
 
 **EVA procesa dumps:** `temp/` → `20-Tech/30-Product/` → `00-Index/INDEX.md` → `10-Log/LOG.md` → limpia `temp/`

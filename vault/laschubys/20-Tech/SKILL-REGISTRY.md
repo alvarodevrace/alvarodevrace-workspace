@@ -2,6 +2,7 @@
 
 > Índice de skills que Kimi Code debe cargar según el tipo de tarea en Las Chubys.
 > Ubicación global de skills: `~/.kimi-code/skills/`
+> Ubicación local de skills: `Las Chubys/.kimi/skills/`
 > Los nombres deben coincidir exactamente con el nombre de archivo del skill (sin `.md`).
 
 ## Agentes y skills por defecto
@@ -14,6 +15,15 @@
 - `kimi-supabase-types-sync`
 - `kimi-vault-lint`
 - `kimi-n8n-incident-router`
+- `sdd-orchestrator` (local) — feature grande / cambio cross-layer
+- `sdd-explore` (local)
+- `sdd-propose` (local)
+- `sdd-spec` (local)
+- `sdd-design` (local)
+- `sdd-tasks` (local)
+- `sdd-apply` (local)
+- `sdd-verify` (local)
+- `sdd-archive` (local)
 
 ### KIMI-PIXEL (Angular + NestJS)
 - `kimi-angular-admin-demo-hardening`
@@ -59,9 +69,10 @@
 | PR a main (back) | `superpowers-verification-before-completion`, `kimi-nestjs-senior` |
 | Incidente post-deploy | `kimi-sre-runbook`, `kimi-n8n-incident-router` |
 | Actualización de vault | `kimi-vault-ingest`, `kimi-vault-lint`, `kimi-vault-writing-guide` |
+| Feature grande / cambio cross-layer | `sdd-orchestrator`, `sdd-explore`, `sdd-propose`, `sdd-spec`, `sdd-design`, `sdd-tasks`, `sdd-apply`, `sdd-verify`, `sdd-archive` |
 
 ## Cómo usar este registro
 
 Al iniciar una sesión en Las Chubys, TRIN lee este archivo y decide qué agente/skills activar.
 Si la tarea no está en la tabla, TRIN elige los skills más cercanos y justifica la elección.
-Todos los nombres de skill deben existir como archivos `.md` en `~/.kimi-code/skills/`.
+Todos los nombres de skill deben existir como archivos `.md` en `~/.kimi-code/skills/` o en `Las Chubys/.kimi/skills/` según su scope.
