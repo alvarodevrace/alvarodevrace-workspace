@@ -6,10 +6,11 @@
 
 ## Decisiones
 
-1. **Adoptar GGA** como gate de pre-commit en front y back.
-   - Provider: `github:gpt-4o-mini` vía GitHub Models.
-   - Workaround macOS: bash 3.2 no soporta `source <(...)` usado por GGA; se instaló `bash` 5.3 vía Homebrew y se creó wrapper `~/.local/bin/gga` que invoca el script original con `/opt/homebrew/bin/bash`.
-   - Hook integrado en `.husky/pre-commit` junto a `lint-staged`.
+1. **NO adoptar GGA**.
+   - GGA requiere un provider externo (Claude, Codex, GitHub Models, Ollama, etc.).
+   - Álvaro solo usa Kimi con su suscripción y no tiene API key ni IA local.
+   - Se instaló y probó temporalmente, pero se eliminó de front/back.
+   - El gate de calidad queda a cargo de Kimi Code durante las sesiones y del flujo SDD/NOVA.
 
 2. **Adoptar SDD** para features grandes mediante skills locales.
    - Skills creadas en `Las Chubys/.kimi/skills/sdd-*/SKILL.md`.
@@ -28,7 +29,7 @@
 
 ## Estado
 
-- ✅ GGA instalado y configurado en front/back.
+- ❌ GGA descartado (sin provider compatible con Kimi).
 - ✅ Skills SDD locales creadas y registradas.
 - ✅ Git hygiene aplicado.
 - ✅ Ritual Engram → vault documentado.
@@ -42,6 +43,5 @@
 ## Próximos pasos
 
 - Fase 2: migrar `LasChubys-Front` y `LasChubys-Back` a git worktrees sobre un bare repo.
-- Validar GGA en el próximo commit real con archivos de código.
 - Validar flujo SDD en la próxima feature grande.
 - Evaluar si añadir skills de `Gentleman-Skills` (ej. `github-pr`) sin duplicar las existentes.

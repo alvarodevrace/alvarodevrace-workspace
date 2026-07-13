@@ -68,7 +68,7 @@ Catálogo de páginas. Para buscar: `grep -r "Keyword" vault/laschubys/`
 
 | Herramienta | Estado | Nota |
 |---|---|---|
-| GGA pre-commit | ✅ | Provider `github:gpt-4o-mini` en front/back; wrapper bash 5 en `~/.local/bin/gga` |
+| GGA pre-commit | ❌ | Descartado: requiere provider externo; no compatible con "solo Kimi" |
 | SDD skills | ✅ | Skills locales `sdd-*` adaptadas a Kimi Code en `Las Chubys/.kimi/skills/` |
 | Auto-delete branch | ✅ | Habilitado en GitHub para `laschubys-app` y `laschubys-api` |
 | Ramas mergeadas | ✅ | Limpieza realizada 2026-07-13 |
