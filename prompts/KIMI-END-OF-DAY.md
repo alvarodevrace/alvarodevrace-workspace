@@ -55,9 +55,12 @@ Añadir una entrada con este formato:
 ## YYYY-MM-DD — <título corto>
 
 **Agente:** <TRIN|PIXEL|LINK|EVA|NOVA|AURA>
+**Ambiente:** <dev|prod>
 **Tareas:** <lista bullet de 3-5 items máx>
 **Commits:** <hashes o descripciones>
 **PRs:** <números y estados>
+**Deploys:** <ok | fallido | N/A>
+**Smoke test:** <ok | fallido | N/A>
 **Bloqueos:** <ninguno | descripción>
 **Pendientes mañana:** <lista>
 **Vault lint:** <✅ sin issues | ⚠️ N corregidos | ❌ N pendientes>
@@ -94,6 +97,18 @@ Si cambió lógica de negocio, flujos de usuario o requisitos:
 Si cambió alguna credencial, UUID, token, o configuración sensible **propia del proyecto**:
 - Actualizar `INFRA.md` (pero **nunca** escribir secretos completos — referencias a Bitwarden únicamente).
 - Si el cambio es global (Dokploy IDs, Cloudflare, URLs compartidas) → actualiza `vault/INFRA-GLOBAL-2026-06.md`, no el INFRA del proyecto.
+
+### 2.7 PULL REQUESTS Y DEPLOYS
+
+Si durante la sesión se crearon o mergearon PRs:
+
+1. Listar en el LOG los PRs creados, aprobados o mergeados con su estado.
+2. Confirmar que no quedan ramas `feature/*` huérfanas sin propósito.
+3. Si se mergeó a `main`:
+   - Verificar en Dokploy que el deploy terminó correctamente.
+   - Confirmar que el smoke test de producción pasó.
+   - Si falló, reportar inmediatamente como incidente y activar `kimi-sre-runbook`.
+4. Si detectaste un PR de dependabot u otro bot → anotarlo en el LOG como pendiente de cierre/deshabilitación.
 
 ---
 
@@ -154,6 +169,20 @@ Si algo falta → escríbelo ahora. **No dejes memoria solo en el contexto de la
 Si un agente específico (PIXEL, LINK, etc.) trabajó en algo que deba recordar para futuras sesiones:
 - Añadir una nota en la sección de "Contexto persistente" o "Último estado" del archivo de ese agente.
 
+### 5.2 ENGRAM — MEMORIA PERSISTENTE
+
+Antes de cerrar, revisa si hay contextos que deban sobrevivir a la siguiente sesión:
+
+1. Listar memorias del proyecto en Engram (`mcp__engram__mem_search` o `mcp__engram__mem_context`).
+2. Migrar a vault todo lo que sea permanente (decisiones, estado, bloqueos).
+3. Guardar en Engram lo que sea útil para retomar mañana pero que aún no va al vault:
+   - Tareas en progreso.
+   - Workarounds o descubrimientos recientes.
+   - Recordatorios de acciones pendientes inmediatas.
+4. Borrar memorias de Engram que ya estén obsoletas o duplicadas en vault.
+
+Ver convenciones en `vault/alvarodevrace/20-Tech/decisions/2026-07-13-engram-conventions.md`.
+
 ---
 
 ## 6. RESUMEN EJECUTIVO PARA ÁLVARO
@@ -168,7 +197,7 @@ Hecho hoy:
 - <item 2>
 - <item 3>
 
-PRs mergeados: <#22, #31> | Commits: <c793477, 746f435>
+PRs: <#22 merged, #44 pendiente> | Deploy: <ok|fallido|N/A> | Smoke: <ok|fallido|N/A>
 Pendientes mañana: <lista corta>
 Bloqueos: <ninguno | descripción>
 Vault actualizado: <sí | archivos modificados>
@@ -207,6 +236,9 @@ Antes de despedirse, confirma mentalmente:
 - [ ] Infra global actualizada si cambió (`vault/INFRA-GLOBAL-2026-06.md`)
 - [ ] Dumps procesados con `kimi-vault-ingest`
 - [ ] `kimi-vault-lint` ejecutado y sin issues críticos
+- [ ] PRs creados/mergeados documentados en el LOG
+- [ ] Deploy verificado si se mergeó a `main` (Dokploy + smoke test)
+- [ ] PRs de bots (dependabot) reportados como pendientes
 - [ ] Memoria revisada y completa
 - [ ] Skills creadas/actualizadas registradas en catálogos
 - [ ] Resumen entregado a Álvaro

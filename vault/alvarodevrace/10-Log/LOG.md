@@ -67,3 +67,25 @@
 
 ## [2026-05-19] TRIN | Prueba E2E completa. WF-ADR-05 activo. AgroVivas Deal v2 documentado. Bot Telegram migrado a @alvarodevrace_bot.
 ## [2026-05-18] TRIN | Configuración inicial Docuseal + Gotenberg + PDF Templates.
+
+## 2026-07-13 — TRIN | Cierre sistema agentico v2 + Engram integrado
+
+**Agente:** TRIN
+**Ambiente:** prod/dev
+**Tareas:**
+- Completar SKILL-REGISTRY para workspace root (`vault/alvarodevrace/20-Tech/SKILL-REGISTRY.md`).
+- Definir convenciones de memoria Engram vs vault (`vault/alvarodevrace/20-Tech/decisions/2026-07-13-engram-conventions.md`).
+- Actualizar rituales `KIMI-START-OF-DAY.md` y `KIMI-END-OF-DAY.md` para consultar/guardar Engram.
+- Actualizar `agents/KIMI-AGENTS.md` con Engram como Capa 0 de memoria.
+- Mergear PR #1 del workspace (`docs/start-end-day-ambientes` → `develop`).
+- Verificar Engram: `engram doctor` OK, guardado y búsqueda funcionan.
+**Commits:**
+- Workspace: `274d871` (docs: rituales, Engram, Skill Registry alvarodevrace).
+**PRs:** #1 ✅ merged (workspace).
+**Deploys:** N/A.
+**Smoke test:** N/A.
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Probar que Kimi Code invoque herramientas MCP de Engram en una sesión nueva.
+- Migrar memorias temporales de Engram a vault al cerrar próximas sesiones.
+**Vault lint:** ✅ sin issues.
