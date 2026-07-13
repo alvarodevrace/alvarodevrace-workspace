@@ -517,3 +517,21 @@ Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 - Revisar `SUPABASE_SERVICE_ROLE_KEY` en Dokploy con Bitwarden.
 - Verificar smoke test tras deploy.
 **Vault lint:** ✅ sin issues.
+
+---
+
+**Nota posterior (misma sesión):**
+- PR #44 ya estaba merged en `develop`.
+- Se accedió a Dokploy vía API con token de Bitwarden.
+- Se actualizó `SUPABASE_SERVICE_ROLE_KEY` en Dokploy con el valor vigente de Bitwarden.
+- El deploy manual falló: `Module not found "dist/src/main.js"`. El Dockerfile tenía entrypoint incorrecto.
+- Se creó PR #45 (`fix/dockerfile-entrypoint`) para cambiar `CMD` a `dist/main.js`.
+
+**Resultado final:**
+- PR #45 mergeado a `develop`.
+- Se descubrió test desactualizado en `health.controller.spec.ts`; se creó PR #47 y se mergeó a `develop`.
+- Se creó PR #48 (`develop` → `main`) con todos los fixes.
+- PR #48 mergeado y deployado en Dokploy ✅.
+- `/api/health` responde `ok` ✅.
+- `/api/health/ready` responde `ok` ✅.
+- Smoke test local de Playwright: 3/3 passed ✅.

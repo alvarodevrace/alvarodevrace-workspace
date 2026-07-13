@@ -169,6 +169,20 @@ Si algo falta → escríbelo ahora. **No dejes memoria solo en el contexto de la
 Si un agente específico (PIXEL, LINK, etc.) trabajó en algo que deba recordar para futuras sesiones:
 - Añadir una nota en la sección de "Contexto persistente" o "Último estado" del archivo de ese agente.
 
+### 5.2 ENGRAM — MEMORIA PERSISTENTE
+
+Antes de cerrar, revisa si hay contextos que deban sobrevivir a la siguiente sesión:
+
+1. Listar memorias del proyecto en Engram (`mcp__engram__mem_search` o `mcp__engram__mem_context`).
+2. Migrar a vault todo lo que sea permanente (decisiones, estado, bloqueos).
+3. Guardar en Engram lo que sea útil para retomar mañana pero que aún no va al vault:
+   - Tareas en progreso.
+   - Workarounds o descubrimientos recientes.
+   - Recordatorios de acciones pendientes inmediatas.
+4. Borrar memorias de Engram que ya estén obsoletas o duplicadas en vault.
+
+Ver convenciones en `vault/alvarodevrace/20-Tech/decisions/2026-07-13-engram-conventions.md`.
+
 ---
 
 ## 6. RESUMEN EJECUTIVO PARA ÁLVARO
