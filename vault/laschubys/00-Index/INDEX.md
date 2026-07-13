@@ -64,6 +64,17 @@ Catálogo de páginas. Para buscar: `grep -r "Keyword" vault/laschubys/`
 - Git: `develop` → PR → `main` → auto-deploy Dokploy
 - Branch protection: 1 review requerido, enforce admins, no force push
 
+## Workflow y calidad
+
+| Herramienta | Estado | Nota |
+|---|---|---|
+| GGA pre-commit | ✅ | Provider `github:gpt-4o-mini` en front/back; wrapper bash 5 en `~/.local/bin/gga` |
+| SDD skills | ✅ | Skills locales `sdd-*` adaptadas a Kimi Code en `Las Chubys/.kimi/skills/` |
+| Auto-delete branch | ✅ | Habilitado en GitHub para `laschubys-app` y `laschubys-api` |
+| Ramas mergeadas | ✅ | Limpieza realizada 2026-07-13 |
+| Engram ritual | ✅ | Documentado en `agents/KIMI-AGENTS.md` y AGENTS.md de front/back |
+| Worktrees | ⏳ | Pendiente fase 2 |
+
 ## Estado Rápido
 
 | Servicio | URL | Estado |
