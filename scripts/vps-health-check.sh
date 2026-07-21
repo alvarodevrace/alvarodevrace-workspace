@@ -4,7 +4,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STATE_FILE="/tmp/vps-health-status.json"
 
-PING_HOST="72.60.26.201"
+TCP_HOST="72.60.26.201"
+TCP_PORT="443"
 URLS=(
   "https://laschubys.com"
   "https://api.laschubys.com/api/health"
@@ -13,9 +14,24 @@ URLS=(
 
 failures=()
 
-# Ping check
-if ! ping -c 1 -W 3 "${PING_HOST}" >/dev/null 2>&1; then
-  failures+=("ping ${PING_HOST}")
+# macOS does not ship GNU `timeout`; emulate it in pure Bash.
+run_with_timeout() {
+  local secs=$1
+  shift
+  local pid rc=0
+  "$@" &
+  pid=$!
+  (sleep "$secs"; kill "$pid" 2>/dev/null) &
+  local killer=$!
+  wait "$pid" || rc=$?
+  kill "$killer" 2>/dev/null
+  wait "$killer" 2>/dev/null || true
+  return "$rc"
+}
+
+# TCP connectivity check (VPS blocks ICMP, so use port 443)
+if ! run_with_timeout 3 bash -c "cat < /dev/null > /dev/tcp/${TCP_HOST}/${TCP_PORT}" >/dev/null 2>&1; then
+  failures+=("tcp ${TCP_HOST}:${TCP_PORT}")
 fi
 
 # HTTP checks
