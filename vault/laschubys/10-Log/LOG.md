@@ -3,6 +3,50 @@
 Registro append-only. Formato: `## [YYYY-MM-DD] [AGENTE] | operación`
 Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 
+## [2026-07-21] KIMICO | Recuperación VPS caído + watchdog local macOS
+
+**Agente:** KIMICO (TRIN)
+**Ambiente:** prod
+**Tareas:**
+- VPS Hostinger caído desde 2026-07-12T21:35-05:00. Root cause: hypervisor-initiated shutdown (`systemd-logind: System is powering down (hypervisor initiated shutdown)`). Estuvo apagado 7 días, 23 horas.
+- Recuperación: VPS encendido manualmente; todos los servicios (Dokploy, Las Chubys app/api, n8n, Supabase, Uptime Kuma, Docuseal, Umami) estabilizados y respondiendo 200.
+- Implementado watchdog local macOS para detectar futuras caídas del VPS: `scripts/vps-health-check.sh`, `scripts/com.alvarodevrace.vps-health-check.plist`, `scripts/install-vps-health-check.sh`.
+- Verificación del watchdog: healthy run silencioso, falla simulada notifica, anti-spam de 60 min funciona.
+- Password SSH root del VPS guardada en Bitwarden (`global/ssh-root-vps`).
+**Commits:** `73b63d3`, `161436b`, `2b855bc`, `f567f91`, `a04824f`, `df4e57f`, `ade9dbd`.
+**PRs:** Ninguno — a espera de aprobación de Álvaro.
+**Deploys:** N/A.
+**Smoke test:** ✅ `laschubys.com`, `api.laschubys.com/api/health`, `n8n.alvarodevrace.tech` → 200.
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Commit de cambios locales unstaged en `LasChubys-Front` y `LasChubys-Back` (dotenv + server entries + throttle condicional).
+- Crear PRs `develop → main` de front/back cuando Álvaro apruebe.
+**Vault lint:** ✅ sin issues.
+
+---
+
+## [2026-07-13] KIMICO | Fix entorno local dev: productos, SSR .env, throttle
+
+**Agente:** KIMICO (TRIN)
+**Ambiente:** dev
+**Tareas:**
+- Fix local: productos no se mostraban en `http://localhost:4321/tienda`. Root cause: `LasChubys-Back/.env` tenía placeholders (`your-project.supabase.co`). Se restauraron credenciales de develop desde Bitwarden (`global/supabase-anon-key`, `global/supabase-service-role-key`) apuntando a `https://db.alvarodevrace.tech`.
+- Fix SSR: Angular SSR no cargaba `.env` y usaba `https://api.laschubys.com` por default. Se instaló `dotenv` en `LasChubys-Front` y se importó `dotenv/config` en `server.ts` y `src/main.server.ts`. Ahora SSR pega a `http://127.0.0.1:3000/api`.
+- Fix throttle: `ThrottlerGuard` global desactivado en desarrollo (`NODE_ENV !== 'production'`) para evitar `Too Many Requests` desde SSR local.
+- Verificación: back devuelve 9 productos; tienda local renderiza productos correctamente; typecheck limpio en front y back.
+**Commits:** Ninguno aún — cambios locales unstaged pendientes de commit.
+**PRs:** Ninguno.
+**Deploys:** N/A.
+**Smoke test:** ✅ local (`/tienda` 200, productos visibles).
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Commit de cambios locales en `develop` (front: dotenv + server entries; back: throttle condicional).
+- Crear PRs `develop → main` cuando se aprueben.
+- Continuar auditoría Gentleman Programming aislada (pendiente según instrucción de Álvaro).
+**Vault lint:** ✅ sin issues.
+
+---
+
 ## [2026-07-12] KIMICO | Sentry → Telegram, CSP prod, merge PRs, Dependabot limpio
 
 **Agente:** KIMICO (TRIN)

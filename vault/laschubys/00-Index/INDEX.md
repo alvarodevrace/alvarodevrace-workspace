@@ -1,8 +1,8 @@
 # Las Chubys — Índice Wiki
 
-> **Estado Infra**: ✅ Production readiness mergeado y verificado — 2026-07-12; PRs `develop → main` mergeados (`laschubys-api#34`, `laschubys-app#44`, `laschubys-app#50` CSP fix, `laschubys-app#51` CSP Sentry + infra fixes, `laschubys-api#39` Dependabot restringido). Deploys aplicados. Workflows n8n activados: `LCH / Contact / Notify` (`cKjMho8h6nivGQ03`), `OPS / Infra / Resource Alert` (`DhTLEpls5Djq94rE`) y `LCH / Sentry / Alert` (`75uNLt9LI5PHLUiG`). Sentry internal integration `LCH Telegram Webhook` instalada; alertas de issues nuevos/regresiones en proyectos `javascript` (app) y `node` (api) notifican al bot Las Chubys. Backup script `/opt/scripts/backup-generate.sh` reparado con dump PostgreSQL n8n. `N8N_WEBHOOK_URL` configurada en Dokploy para `laschubys-api`. CSP corregido con `worker-src 'self' blob:` y origen Sentry en `connect-src`. Dependabot reconfigurado para solo parches/menores agrupados mensualmente; PRs de bots mayores cerrados. Worktrees limpios.
-> **Listo para**: Validar en browser real errores de CSP; validar ejecución automática del backup script (cron 03:00); monitorear workflows n8n.
-> **Último trabajo**: Importación/activación de workflows n8n, reparación de backup script, configuración de env var `N8N_WEBHOOK_URL`, merge `prod-readiness-lch` a `develop`, creación de PRs y limpieza de worktrees. Registrado en [LOG.md](../10-Log/LOG.md).
+> **Estado Infra**: ✅ VPS recuperado — 2026-07-21: VPS Hostinger estuvo caído desde 2026-07-12 por hypervisor-initiated shutdown; encendido manualmente y todos los servicios responden 200. Watchdog local macOS implementado para detectar futuras caídas (`scripts/vps-health-check.sh`). Entorno local dev estabilizado — 2026-07-13: `.env` del back apunta a Supabase develop, SSR front carga `.env` vía `dotenv`, throttle global desactivado en dev. Cambios locales unstaged pendientes de commit.
+> **Listo para**: Validar en browser real errores de CSP; validar ejecución automática del backup script (cron 03:00); monitorear workflows n8n; commit local de fixes dev y crear PRs.
+> **Último trabajo**: Recuperación VPS caído + watchdog local macOS. Registrado en [LOG.md](../10-Log/LOG.md).
 
 ---
 
@@ -37,6 +37,7 @@ Catálogo de páginas. Para buscar: `grep -r "Keyword" vault/laschubys/`
 | [RUNBOOK-LCH.md](../20-Tech/RUNBOOK-LCH.md) | Runbook de incidentes de producción |
 | [Architecture.md](../20-Tech/Architecture.md) | Diagrama de arquitectura y flujos críticos |
 | [n8n/workflows/](../20-Tech/n8n/workflows/) | JSON exportable de workflows n8n |
+| [decisions/](../20-Tech/decisions/) | Decisiones técnicas recientes (Engram, Gentleman, local dev fixes) |
 
 ## 30-Product (features y roadmap)
 
