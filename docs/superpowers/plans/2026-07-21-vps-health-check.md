@@ -24,7 +24,7 @@
 | File | Responsibility |
 |------|----------------|
 | `scripts/vps-health-check.sh` | Performs TCP/HTTP checks and shows macOS notification when needed. |
-| `infra/mac/launchagents/com.alvarodevrace.vps-health-check.plist` | launchd definition: run at login and every 30 minutes. |
+| `scripts/com.alvarodevrace.vps-health-check.plist` | launchd definition: run at login and every 30 minutes. |
 | `scripts/install-vps-health-check.sh` | Copies plist to `~/Library/LaunchAgents/`, patches absolute path, loads agent. |
 
 ---
@@ -154,7 +154,7 @@ git commit -m "feat(monitoring): add local macOS VPS health check script"
 ### Task 2: LaunchAgent plist
 
 **Files:**
-- Create: `infra/mac/launchagents/com.alvarodevrace.vps-health-check.plist`
+- Create: `scripts/com.alvarodevrace.vps-health-check.plist`
 
 **Interfaces:**
 - Consumes: `scripts/vps-health-check.sh` (absolute path patched by installer).
@@ -162,7 +162,7 @@ git commit -m "feat(monitoring): add local macOS VPS health check script"
 
 - [ ] **Step 1: Create the plist template**
 
-Create `infra/mac/launchagents/com.alvarodevrace.vps-health-check.plist`:
+Create `scripts/com.alvarodevrace.vps-health-check.plist`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -190,7 +190,7 @@ Create `infra/mac/launchagents/com.alvarodevrace.vps-health-check.plist`:
 - [ ] **Step 2: Commit**
 
 ```bash
-git add infra/mac/launchagents/com.alvarodevrace.vps-health-check.plist
+git add scripts/com.alvarodevrace.vps-health-check.plist
 git commit -m "feat(monitoring): add launchd agent for VPS health check"
 ```
 
@@ -215,7 +215,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 SCRIPT_PATH="${REPO_ROOT}/scripts/vps-health-check.sh"
-PLIST_SOURCE="${REPO_ROOT}/infra/mac/launchagents/com.alvarodevrace.vps-health-check.plist"
+PLIST_SOURCE="${REPO_ROOT}/scripts/com.alvarodevrace.vps-health-check.plist"
 PLIST_TARGET="${HOME}/Library/LaunchAgents/com.alvarodevrace.vps-health-check.plist"
 
 if [[ "$(uname -s)" != "Darwin" ]]; then

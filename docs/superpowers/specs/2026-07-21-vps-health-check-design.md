@@ -42,7 +42,7 @@ macOS launchd
 | Path | Purpose |
 |------|---------|
 | `scripts/vps-health-check.sh` | Health check logic and notification. |
-| `infra/mac/launchagents/com.alvarodevrace.vps-health-check.plist` | launchd job definition. |
+| `scripts/com.alvarodevrace.vps-health-check.plist` | launchd job definition. |
 | `scripts/install-vps-health-check.sh` | One-command installer. |
 | `/tmp/vps-health-status.json` | Runtime state to avoid notification spam. |
 
