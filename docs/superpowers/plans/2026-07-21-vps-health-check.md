@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` (recommended) or `superpowers:executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Create a local macOS watchdog that pings the Hostinger VPS and curls critical public URLs, showing a native notification if anything is unreachable.
+**Goal:** Create a local macOS watchdog that probes the Hostinger VPS via TCP 443 and curls critical public URLs, showing a native notification if anything is unreachable.
 
 **Architecture:** A shell script performs the checks and emits macOS notifications via `osascript`. A `launchd` LaunchAgent runs the script at user login and every 30 minutes. A small installer registers the agent. State is tracked in `/tmp/vps-health-status.json` to avoid notification spam.
 
@@ -12,7 +12,7 @@
 
 - macOS only.
 - No external services or credentials.
-- Short timeouts: 3s ping, 5s curl.
+- Short timeouts: 3s TCP probe, 5s curl.
 - Notify only on `healthy → unhealthy` transition or once per 60 minutes while unhealthy.
 - Silent on success.
 - Keep files small and focused.
@@ -320,7 +320,7 @@ Expected: no second notification (state file shows last_alert_ts recent).
 
 - [ ] **Step 3: Restore script**
 
-Revert `PING_HOST` to `72.60.26.201` and restore URLs.
+Revert `TCP_HOST` to `72.60.26.201` and restore URLs.
 
 Run:
 

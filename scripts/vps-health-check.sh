@@ -64,21 +64,24 @@ if [[ "${healthy}" == "false" ]]; then
   fi
 fi
 
+healthy_bool=$([[ "$healthy" == "true" ]] && echo "True" || echo "False")
+
 if [[ "${should_notify}" == "true" ]]; then
-  timestamp=$(date -Iseconds)
+  timestamp=$(date +%Y-%m-%dT%H:%M:%S%z)
   echo "[${timestamp}] VPS health check FAILED: ${#failures[@]} failure(s)"
   printf '  - %s\n' "${failures[@]}"
   body=$(printf '%s\n' "${failures[@]}")
   escaped_body=${body//\\/\\\\}
   escaped_body=${escaped_body//\"/\\\"}
-  osascript -e "display notification \"${escaped_body}\" with title \"VPS / servicio caído\" sound name \"Ping\"" || true
-  echo "[$(date -Iseconds)] Notification dispatched"
-  last_alert_ts=${now_ts}
+  if osascript -e "display notification \"${escaped_body}\" with title \"VPS / servicio caído\" sound name \"Ping\""; then
+    echo "[$(date +%Y-%m-%dT%H:%M:%S%z)] Notification dispatched"
+    last_alert_ts=${now_ts}
+  fi
 fi
 
 # Write state
-python3 - <<PY
+python3 - <<PY || true
 import json
 with open("${STATE_FILE}", "w") as f:
-    json.dump({"healthy": ${healthy^}, "last_alert_ts": ${last_alert_ts}, "checked_at": ${now_ts}}, f)
+    json.dump({"healthy": ${healthy_bool}, "last_alert_ts": ${last_alert_ts}, "checked_at": ${now_ts}}, f)
 PY
