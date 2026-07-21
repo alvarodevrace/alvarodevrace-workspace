@@ -41,8 +41,9 @@ macOS launchd
 
 | Path | Purpose |
 |------|---------|
-| `scripts/vps-health-check.sh` | Health check logic and notification. |
-| `scripts/com.alvarodevrace.vps-health-check.plist` | launchd job definition. |
+| `scripts/vps-health-check.sh` | Source health check logic and notification. |
+| `~/.local/bin/vps-health-check.sh` | Installed copy executed by launchd. |
+| `scripts/com.alvarodevrace.vps-health-check.plist` | launchd job definition template. |
 | `scripts/install-vps-health-check.sh` | One-command installer. |
 | `/tmp/vps-health-status.json` | Runtime state to avoid notification spam. |
 
@@ -79,9 +80,9 @@ Run from the project root:
 ```
 
 The installer:
-1. Copies the plist to `~/Library/LaunchAgents/`.
-2. Replaces placeholders with the absolute path to `scripts/vps-health-check.sh`.
-3. Loads the agent with `launchctl load`.
+1. Copies `scripts/vps-health-check.sh` to `~/.local/bin/vps-health-check.sh`.
+2. Copies the plist to `~/Library/LaunchAgents/` and replaces placeholders with the absolute path to `~/.local/bin/vps-health-check.sh`.
+3. Boots out any previously loaded instance and bootstraps the agent with `launchctl bootout` / `launchctl bootstrap`.
 
 ## Testing
 

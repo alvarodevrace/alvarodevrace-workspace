@@ -30,12 +30,9 @@ chmod +x "${SCRIPT_TARGET}"
 # Copy plist and patch absolute script path
 sed "s|__SCRIPT_PATH__|${SCRIPT_TARGET}|g" "${PLIST_SOURCE}" > "${PLIST_TARGET}"
 
-# Unload if already loaded, then load
-if launchctl list | grep -q "com.alvarodevrace.vps-health-check"; then
-  launchctl unload "${PLIST_TARGET}" 2>/dev/null || true
-fi
-
-launchctl load "${PLIST_TARGET}"
+# Boot out existing agent if loaded, then bootstrap.
+launchctl bootout gui/"$(id -u)" "${PLIST_TARGET}" 2>/dev/null || true
+launchctl bootstrap gui/"$(id -u)" "${PLIST_TARGET}"
 
 echo "Installed and loaded: ${PLIST_TARGET}"
 echo "Next run: at login and every 30 minutes."
