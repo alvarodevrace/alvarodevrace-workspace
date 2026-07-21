@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 STATE_FILE="/tmp/vps-health-status.json"
 
 TCP_HOST="72.60.26.201"
@@ -24,7 +23,7 @@ run_with_timeout() {
   (sleep "$secs"; kill "$pid" 2>/dev/null) &
   local killer=$!
   wait "$pid" || rc=$?
-  kill "$killer" 2>/dev/null
+  kill "$killer" 2>/dev/null || true
   wait "$killer" 2>/dev/null || true
   return "$rc"
 }
@@ -36,7 +35,7 @@ fi
 
 # HTTP checks
 for url in "${URLS[@]}"; do
-  code=$(curl -s -o /dev/null --max-time 5 -w "%{http_code}" "${url}" 2>/dev/null || echo "000")
+  code=$(curl -sL -o /dev/null --max-time 5 -w "%{http_code}" "${url}" 2>/dev/null || echo "000")
   if [[ ! "${code}" =~ ^[23] ]]; then
     failures+=("${url} -> ${code}")
   fi
@@ -66,8 +65,14 @@ if [[ "${healthy}" == "false" ]]; then
 fi
 
 if [[ "${should_notify}" == "true" ]]; then
+  timestamp=$(date -Iseconds)
+  echo "[${timestamp}] VPS health check FAILED: ${#failures[@]} failure(s)"
+  printf '  - %s\n' "${failures[@]}"
   body=$(printf '%s\n' "${failures[@]}")
-  osascript -e "display notification \"${body//\"/\\\"}\" with title \"VPS / servicio caído\" sound name \"Ping\""
+  escaped_body=${body//\\/\\\\}
+  escaped_body=${escaped_body//\"/\\\"}
+  osascript -e "display notification \"${escaped_body}\" with title \"VPS / servicio caído\" sound name \"Ping\"" || true
+  echo "[$(date -Iseconds)] Notification dispatched"
   last_alert_ts=${now_ts}
 fi
 
