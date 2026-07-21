@@ -1,0 +1,88 @@
+--- docs/superpowers/sdd/diffs/task-6-before.md	2026-06-24 22:12:31
++++ vault/laschubys/40-Credentials/INFRA.md	2026-06-24 22:14:00
+@@ -10,13 +10,14 @@
+ | Campo | Valor |
+ |---|---|
+ | Dominio | `laschubys.com` |
+-| Zone ID | `b1bd4dda49d48900eecb9228673ef1e9` |
++| Zone ID | Ver `vault/INFRA-GLOBAL-2026-06.md` |
+ | API Token | `bitwarden:global/cloudflare-api-token` |
+ 
+ ```bash
+ # Purgar cache laschubys.com
++ZONE_ID="<ver INFRA-GLOBAL-2026-06.md>"
+ CF_TOKEN=$(bw get password cloudflare-api-token)
+-curl -X POST "https://api.cloudflare.com/client/v4/zones/b1bd4dda49d48900eecb9228673ef1e9/purge_cache" \
++curl -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
+   -H "Authorization: Bearer $CF_TOKEN" \
+   -H "Content-Type: application/json" \
+   -d '{"purge_everything": true}'
+@@ -30,11 +31,11 @@
+ |---|---|---|
+ | App Producción | https://laschubys.com | ✅ Healthy |
+ | Staging | https://laschubys.alvarodevrace.tech | ✅ Healthy |
+-| n8n | https://n8n.alvarodevrace.tech | ✅ Healthy |
+-| Supabase (self-hosted) | https://db.alvarodevrace.tech / schema: `laschubys` | ✅ Online |
+-| Dokploy project `laschubys` | `dcZfubBCdj1wno5hroswj` | ✅ |
+-| Dokploy `laschubys-app` (Angular 21 SSR) | `XX0AfFKhYHn9ayErXevJF` | ✅ done |
+-| Dokploy `laschubys-api` (NestJS BFF) | `GzBwWmUjlYRCgfMK6tzBt` | ✅ done |
++| n8n | Ver `vault/INFRA-GLOBAL-2026-06.md` | ✅ Healthy |
++| Supabase (self-hosted) | Ver `vault/INFRA-GLOBAL-2026-06.md` | ✅ Online |
++| Dokploy project `laschubys` | Ver `vault/INFRA-GLOBAL-2026-06.md` | ✅ |
++| Dokploy `laschubys-app` (Angular 21 SSR) | Ver `vault/INFRA-GLOBAL-2026-06.md` | ✅ done |
++| Dokploy `laschubys-api` (NestJS BFF) | Ver `vault/INFRA-GLOBAL-2026-06.md` | ✅ done |
+ | GitHub repo frontend | `alvarodevrace/laschubys-app` | ✅ |
+ | GitHub repo backend | `alvarodevrace/laschubys-api` | ✅ |
+ | SSH remote frontend | `git@github-alvarodevrace:alvarodevrace/laschubys-app.git` | ✅ |
+@@ -44,18 +45,12 @@
+ 
+ ## Tokens y Credenciales
+ 
+-| Servicio | Referencia |
++Ver referencias globales en `vault/INFRA-GLOBAL-2026-06.md`.
++
++| Servicio | Referencia específica de Las Chubys |
+ |---|---|
+-| Dokploy API Key | `bitwarden:global/dokploy-api-token` |
+-| n8n API Key | `bitwarden:global/n8n-api-key` |
+-| Telegram @alvarodevrace_bot | `bitwarden:global/telegram-bot-alvarodevrace` |
+-| Telegram @LasChubysbot | `bitwarden:global/telegram-bot-laschubys` |
+-| Cloudflare API Token | `bitwarden:global/cloudflare-api-token` |
+ | Sentry Frontend DSN | `bitwarden:global/sentry-dsn-laschubys-app` |
+ | Sentry Backend DSN | `bitwarden:global/sentry-dsn-laschubys-api` |
+-| Supabase URL | `https://db.alvarodevrace.tech` |
+-| Supabase Anon Key | `bitwarden:global/supabase-anon-key` |
+-| Supabase Service Role Key | `bitwarden:global/supabase-service-role-key` |
+ | Indexing API OAuth2 | `alpepito93@gmail.com` |
+ 
+ ---
+@@ -91,11 +86,9 @@
+ | LasChubys Homepage | `https://laschubys.com` | 60s |
+ | LasChubys API Health | `https://api.laschubys.com/api/health` | 60s |
+ | LasChubys Sitemap | `https://api.laschubys.com/sitemap.xml` | 300s |
+-| Supabase REST API | `https://db.alvarodevrace.tech/rest/v1/` | 60s |
+-| n8n Health | `https://n8n.alvarodevrace.tech/healthz` | 60s |
+-| Status Page (meta) | `https://status.alvarodevrace.tech` | 300s |
+-| Dokploy | `https://dokploy.alvarodevrace.tech` | 300s |
+ 
++Monitores globales → `vault/INFRA-GLOBAL-2026-06.md`.
++
+ **Notificaciones**: Telegram @alvarodevrace_bot
+ 
+ ### ~~Netdata~~ — ELIMINADO 2026-06-10
+@@ -182,15 +175,6 @@
+ 
+ ---
+ 
+-## Infraestructura Física
+-
+-| Servidor | Tailscale IP | Rol | fail2ban | UFW |
+-|---|---|---|---|---|
+-| VPS (Hostinger) | `100.105.133.25` | Producción (Dokploy, Supabase, n8n) | ✅ | ✅ |
+-| Dell (zion-node) | `100.88.228.17` | Staging/Backup (Planka, Crawl4AI, Gotenberg) | ✅ | ✅ |
+-
+----
+-
+ ## Git Flow
+ 
+ ```

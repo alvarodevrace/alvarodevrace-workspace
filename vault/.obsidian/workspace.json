@@ -1,0 +1,203 @@
+{
+  "main": {
+    "id": "6e0e2032212f5b98",
+    "type": "split",
+    "children": [
+      {
+        "id": "44b785dfe5755f4d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8a7437c24f533bdc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "laschubys/30-Product/Ecommerce-Logic.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ecommerce-Logic"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8408a45b3090680d",
+    "type": "split",
+    "children": [
+      {
+        "id": "de01bb939e19c118",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "add80ac277ded60f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "8a6243c8f171fd05",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Buscar"
+            }
+          },
+          {
+            "id": "745267b4c1b7fea3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "637842c4a3ed93ad",
+    "type": "split",
+    "children": [
+      {
+        "id": "43a6d84f803abe11",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c58f31b738c1c660",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "laschubys/temp/2026-04-28-EVA.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Enlaces entrantes de 2026-04-28-EVA"
+            }
+          },
+          {
+            "id": "d59cb7a145717370",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "laschubys/temp/2026-04-28-EVA.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Enlaces salientes de 2026-04-28-EVA"
+            }
+          },
+          {
+            "id": "12d89aa023bc4b03",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "1f0d960ce5839b1d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas las propiedades"
+            }
+          },
+          {
+            "id": "df15ffa035df7e98",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "laschubys/temp/2026-04-28-EVA.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Esquema de 2026-04-28-EVA"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "8a7437c24f533bdc",
+  "lastOpenFiles": [
+    "laschubys/00-Meta/MOC-Las-Chubys.md",
+    "laschubys/00-Index/INDEX.md",
+    "brain/temp/2026-05-05-TRIN-v2.md",
+    "brain/temp/2026-05-05-TRIN.md",
+    "brain/temp/2026-05-05-PIXEL.md",
+    "brain/temp/2026-05-04-TRIN.md",
+    "brain/00-Index/MASTER.md",
+    "laschubys/temp/2026-04-28-EVA.md",
+    "laschubys/temp/2026-04-29-LINK.md",
+    "laschubys/10-Log/2026-04-29.md",
+    "laschubys/temp/2026-04-28-TRIN.md",
+    "laschubys/temp/2026-04-28-PIXEL.md",
+    "laschubys/temp/2026-04-28-LINK.md",
+    "laschubys/00-Meta/Tags.md"
+  ]
+}

@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  @page { margin: 32px 0 0 0; }
+  @page :first { margin-top: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #454546;
+    font-size: 12px;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #454546;
+    padding: 34px 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #5dc1b9;
+  }
+
+  .brand-name { font-size: 32px; font-weight: 900; color: #ffffff; letter-spacing: -1.5px; line-height: 1; }
+  .brand-sub { font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 0.5px; }
+
+  .header-right { text-align: right; }
+  .doc-type { font-size: 34px; font-weight: 900; color: #5dc1b9; letter-spacing: -1.5px; line-height: 1; }
+  .doc-num { font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 6px; letter-spacing: 1px; font-weight: 500; }
+
+  /* ── CIVIL BAR ── */
+  .civil-bar {
+    background: #f9fafb;
+    border-bottom: 2px solid #5dc1b9;
+    padding: 10px 52px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9.5px;
+    color: #6b7280;
+    letter-spacing: 0.3px;
+  }
+
+  .civil-bar strong { color: #454546; font-weight: 700; }
+  .civil-dot { width: 5px; height: 5px; background: #5dc1b9; border-radius: 50%; flex-shrink: 0; }
+
+  /* ── PARTES ── */
+  .partes-bar {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 20px 52px;
+    display: flex;
+    background: #fafafa;
+  }
+
+  .parte { flex: 1; padding-right: 36px; }
+  .parte + .parte { padding-left: 36px; padding-right: 0; border-left: 2px solid #5dc1b9; }
+
+  .parte-label {
+    font-size: 9px; font-weight: 700; color: #5dc1b9;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px;
+  }
+  .parte-nombre { font-size: 14px; font-weight: 800; color: #454546; letter-spacing: -0.3px; }
+  .parte-detalle { font-size: 11px; color: #6b7280; margin-top: 1px; }
+
+  /* ── CONTENT ── */
+  .content { padding: 26px 52px; }
+
+  /* ── CLAUSULA ── */
+  .clausula {
+    margin-bottom: 18px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .clausula-num {
+    font-size: 8.5px; font-weight: 900; color: #5dc1b9;
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2px;
+  }
+
+  .clausula-titulo {
+    font-size: 12px; font-weight: 800; color: #454546;
+    letter-spacing: -0.3px; margin-bottom: 8px;
+    padding-bottom: 7px;
+    border-bottom: 1.5px solid #5dc1b9;
+    break-after: avoid; page-break-after: avoid;
+  }
+
+  .clausula p { font-size: 11.5px; color: #374151; line-height: 1.75; margin-bottom: 5px; }
+  .clausula p:last-child { margin-bottom: 0; }
+
+  .clausula ul { list-style: none; margin: 6px 0; padding: 0; }
+  .clausula ul li {
+    font-size: 11.5px; color: #374151;
+    padding: 4px 0 4px 16px; position: relative;
+    border-bottom: 1px solid #f9fafb;
+  }
+  .clausula ul li:last-child { border-bottom: none; }
+  .clausula ul li::before {
+    content: '—'; position: absolute; left: 0; color: #5dc1b9; font-weight: 700;
+  }
+
+  .ley-ref { font-size: 9.5px; color: #9ca3af; font-style: italic; margin-top: 5px; }
+
+  /* ── ALERT / INFO / OK ── */
+  .alert {
+    background: #fffbeb; border-left: 3px solid #f59e0b;
+    padding: 9px 13px; margin: 8px 0;
+    font-size: 11px; color: #78350f; line-height: 1.6;
+    break-inside: avoid;
+  }
+
+  .info-box {
+    background: #f0faf9; border-left: 3px solid #5dc1b9;
+    padding: 9px 13px; margin: 8px 0;
+    font-size: 11px; color: #5dc1b9; line-height: 1.6;
+    break-inside: avoid;
+  }
+
+  .ok-box {
+    background: #f0faf9; border-left: 3px solid #5dc1b9;
+    padding: 9px 13px; margin: 8px 0;
+    font-size: 11px; color: #5dc1b9; line-height: 1.6;
+    break-inside: avoid;
+  }
+
+  /* ── TABLA HITOS ── */
+  .hitos-table {
+    width: 100%; border-collapse: collapse;
+    margin: 10px 0 6px; break-inside: avoid; font-size: 11.5px;
+  }
+
+  .hitos-table thead tr { border-bottom: 2px solid #5dc1b9; }
+  .hitos-table thead th {
+    padding: 7px 12px 9px; text-align: left;
+    font-size: 9px; font-weight: 700; color: #5dc1b9;
+    text-transform: uppercase; letter-spacing: 1.5px;
+  }
+  .hitos-table thead th:last-child { text-align: right; }
+
+  .hitos-table tbody tr { border-bottom: 1px solid #f3f4f6; }
+  .hitos-table tbody tr:nth-child(even) { background: #f9fafb; }
+  .hitos-table tbody td { padding: 9px 12px; color: #374151; }
+  .hitos-table tbody td:last-child { text-align: right; font-weight: 700; color: #454546; }
+
+  .hitos-table tfoot tr { background: #454546; border-top: 2px solid #5dc1b9; }
+  .hitos-table tfoot td { padding: 10px 12px; font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+  .hitos-table tfoot td:last-child {
+    text-align: right; color: #5dc1b9;
+    font-size: 17px; font-weight: 900; letter-spacing: -0.5px;
+  }
+
+  /* ── FIRMAS ── */
+  .firmas-section {
+    margin-top: 26px;
+    break-inside: avoid; page-break-inside: avoid;
+  }
+
+  .firmas-label {
+    font-size: 9px; font-weight: 700; color: #5dc1b9;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    border-bottom: 2px solid #5dc1b9;
+    padding-bottom: 7px; margin-bottom: 18px;
+  }
+
+  .firmas-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 14px;
+  }
+
+  .firma-parte-label {
+    font-size: 9px; font-weight: 700; color: #5dc1b9;
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px;
+  }
+  .firma-nombre { font-size: 13px; font-weight: 800; color: #454546; letter-spacing: -0.3px; }
+  .firma-rol { font-size: 11px; color: #6b7280; margin-bottom: 16px; }
+
+  .firma-campo {
+    border-top: none; border-left: none; border-right: none;
+    border-bottom: 2px solid #5dc1b9;
+    padding: 36px 0 5px;
+    font-size: 10px; color: #d1d5db; letter-spacing: 0.5px; display: block;
+  }
+
+  .firma-fecha { margin-top: 8px; font-size: 10.5px; color: #9ca3af; }
+
+  .firmas-legal {
+    background: #f9fafb; border: 1px solid #e5e7eb; border-top: 2px solid #5dc1b9;
+    padding: 12px 16px;
+    font-size: 10.5px; color: #9ca3af; line-height: 1.65;
+    break-inside: avoid;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: #454546;
+    border-top: 3px solid #5dc1b9;
+    padding: 20px 52px;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 26px;
+  }
+
+  .footer-brand { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+  .footer-brand span { color: #5dc1b9; }
+  .footer-meta { font-size: 10px; color: rgba(255,255,255,0.55); text-align: right; line-height: 1.7; }
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="brand-name">Álvaro Carrera</div>
+    <div class="brand-sub">Arquitecto de Software &amp; Desarrollador Web &nbsp;·&nbsp; alvarodevrace.tech</div>
+  </div>
+  <div class="header-right">
+    <div class="doc-type">CONTRATO</div>
+    <div class="doc-num">N° {{CONTRATO_NUMERO}} &nbsp;·&nbsp; {{CONTRATO_FECHA}}</div>
+  </div>
+</div>
+
+<div class="civil-bar">
+  <div class="civil-dot"></div>
+  <strong>Contrato Civil de Prestación de Servicios Profesionales Independientes</strong>
+  &nbsp;·&nbsp; Sin relación de dependencia laboral &nbsp;·&nbsp; Ley 67 (Firma Electrónica) &nbsp;·&nbsp; Código Civil Ecuador
+</div>
+
+<div class="partes-bar">
+  <div class="parte">
+    <div class="parte-label">Prestador de servicios</div>
+    <div class="parte-nombre">Álvaro Carrera Montalvo</div>
+    <div class="parte-detalle">Desarrollador de Software Independiente</div>
+    <div class="parte-detalle">AlvaroDevRace · alvarodevrace.tech</div>
+    <div class="parte-detalle">alcarreram@hotmail.com · Ecuador</div>
+  </div>
+  <div class="parte">
+    <div class="parte-label">Cliente</div>
+    <div class="parte-nombre">{{CLIENTE_EMPRESA}}</div>
+    <div class="parte-detalle">Representante: {{CLIENTE_NOMBRE}}</div>
+    <div class="parte-detalle">{{CLIENTE_EMAIL}}</div>
+    <div class="parte-detalle">{{CLIENTE_CIUDAD}}, Ecuador</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 01</div>
+    <div class="clausula-titulo">Naturaleza del contrato y declaración de independencia</div>
+    <p>El presente es un <strong>contrato civil de prestación de servicios profesionales independientes</strong>, regulado por el Código Civil de la República del Ecuador. Las partes declaran y aceptan expresamente que:</p>
+    <ul>
+      <li>La relación es de naturaleza exclusivamente civil — sin dependencia laboral, subordinación ni vínculo patronal.</li>
+      <li>El Prestador ejerce su actividad de forma autónoma, con sus propias herramientas, metodologías y horarios.</li>
+      <li>El Cliente no tiene obligación de afiliar al Prestador al IESS ni pagar beneficios sociales laborales.</li>
+      <li>El Prestador es responsable de sus propias obligaciones tributarias y de seguridad social como trabajador autónomo.</li>
+    </ul>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 02</div>
+    <div class="clausula-titulo">Objeto del contrato — alcance del trabajo</div>
+    <p>El Prestador se compromete a desarrollar el proyecto <strong>"{{PROYECTO_NOMBRE}}"</strong> para el Cliente, conforme a las especificaciones de la propuesta <strong>N° {{COT_NUMERO}}</strong> del {{COT_FECHA}}, incorporada como Anexo 1 y parte integral de este contrato.</p>
+    <div class="alert">⚠ Todo requerimiento no descrito en la propuesta N° {{COT_NUMERO}} se considera fuera del alcance y requiere cotización adicional escrita antes de ser implementado.</div>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 03</div>
+    <div class="clausula-titulo">Entregables y criterios de aceptación</div>
+    <p>Al finalizar cada hito, el Prestador notificará al Cliente por escrito. El Cliente dispondrá de <strong>5 días hábiles</strong> para revisar y comunicar observaciones concretas. Se considera aceptado el entregable si el Cliente aprueba expresamente, o si transcurren los 5 días hábiles sin comunicación de rechazo fundamentado.</p>
+    <p>La aceptación tácita por transcurso del plazo habilita al Prestador a emitir la factura y cobrar el hito correspondiente de inmediato, sin necesidad de aprobación expresa adicional.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 04</div>
+    <div class="clausula-titulo">Condiciones de pago — hitos</div>
+    <p>El monto total del proyecto es de <strong>{{TOTAL}} USD</strong>, pagadero en los siguientes hitos:</p>
+    <table class="hitos-table">
+      <thead>
+        <tr><th>#</th><th>Hito</th><th>Condición de cobro</th><th>Plazo de pago</th><th>Monto</th></tr>
+      </thead>
+      <tbody>{{HITOS_CONTRATO}}</tbody>
+      <tfoot>
+        <tr><td colspan="4">Total del proyecto</td><td>{{TOTAL}}</td></tr>
+      </tfoot>
+    </table>
+    <div class="alert">⚠ El trabajo no inicia hasta recibir el Hito 1. Pagos posteriores: plazo máximo de 7 días calendario desde notificación de hito completado. Mora del 1.5% mensual desde el día 8.</div>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 05</div>
+    <div class="clausula-titulo">Mora e incumplimiento de pago</div>
+    <p>Si un pago supera <strong>7 días</strong> de su fecha límite, el Prestador puede suspender el desarrollo sin incurrir en incumplimiento. Si supera <strong>15 días</strong> sin acuerdo, puede rescindir el contrato conservando los pagos recibidos como compensación. La mora genera un interés del <strong>1.5% mensual</strong> sobre el saldo vencido desde el día 8.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 06</div>
+    <div class="clausula-titulo">Canales de comunicación oficiales</div>
+    <p>Para efectos de este contrato, las comunicaciones escritas, aprobaciones, notificaciones de hito, solicitudes de cambio y cualquier acuerdo entre las partes se realizarán <strong>exclusivamente</strong> a través de los correos electrónicos declarados en la sección de comparecientes: <strong>alcarreram@hotmail.com</strong> (Prestador) y <strong>{{CLIENTE_EMAIL}}</strong> (Cliente), o mediante la plataforma de gestión del proyecto que el Prestador designe.</p>
+    <p>No se consideran comunicaciones oficiales los mensajes de WhatsApp, llamadas telefónicas ni mensajes en redes sociales, salvo que sean confirmados por escrito vía email dentro de las <strong>24 horas siguientes</strong>.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 07</div>
+    <div class="clausula-titulo">Cancelación y terminación anticipada</div>
+    <p><strong>Por el Cliente:</strong> Si cancela tras pagar el Hito 1, ese pago no es reembolsable. Se entrega todo lo desarrollado hasta ese punto.</p>
+    <p><strong>Por el Prestador:</strong> Si cancela sin causa justificada, reembolsa el último pago recibido. Causa justificada incluye: incumplimiento de pago, cambios de alcance no acordados, o conducta irrespetuosa comprobada.</p>
+    <p><strong>Por mutuo acuerdo:</strong> Las partes pueden terminar el contrato en cualquier momento mediante acuerdo escrito con liquidación proporcional al trabajo ejecutado.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 08</div>
+    <div class="clausula-titulo">Propiedad intelectual y cesión de derechos</div>
+    <p>De conformidad con la <strong>Ley de Propiedad Intelectual del Ecuador (Codificación No. 2006-013)</strong>, el Prestador es el titular originario de los derechos de autor sobre el software desarrollado.</p>
+    <p><strong>Cesión condicionada:</strong> El Prestador cede al Cliente todos los derechos patrimoniales de autor sobre los entregables desarrollados específicamente para este proyecto, <strong>únicamente una vez recibido el 100% del pago contratado</strong>. Esta cesión incluye los derechos de reproducción, distribución, modificación y explotación comercial.</p>
+    <p><strong>Excepción — software de terceros:</strong> La cesión no aplica sobre librerías de código abierto (open source), frameworks, componentes de terceros ni herramientas preexistentes del Prestador utilizados en el desarrollo. Sobre dichos componentes, el Cliente recibe una <strong>licencia de uso no exclusiva, irrevocable y perpetua</strong>, conforme a sus respectivas licencias originales, suficiente para el correcto funcionamiento del sistema entregado.</p>
+    <div class="info-box">ℹ El acceso al repositorio otorgado en el Hito 2 es solo para revisión. La transferencia de propiedad completa ocurre al pago total.</div>
+    <p class="ley-ref">Base legal: Art. 8-9 Ley de Propiedad Intelectual Ecuador — El software está protegido como obra literaria.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 09</div>
+    <div class="clausula-titulo">Garantía post-entrega</div>
+    <div class="ok-box">✓ 30 días de garantía desde la entrega final en producción — errores de funcionamiento atribuibles al desarrollo contratado se corrigen sin costo.</div>
+    <p>La garantía <strong>no cubre</strong>: nuevas funcionalidades, cambios de diseño, errores por modificaciones del Cliente o terceros, fallas en servicios externos, ni usos distintos a los documentados. Soporte posterior: <strong>$35 USD/hora</strong>, facturado mensualmente.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 10</div>
+    <div class="clausula-titulo">Cambios de alcance</div>
+    <p>Cualquier modificación a la propuesta N° {{COT_NUMERO}} requiere: solicitud escrita del Cliente, cotización del Prestador en 48 horas, y aprobación escrita antes de implementar. Los cambios pueden afectar el plazo y el costo total del proyecto.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 11</div>
+    <div class="clausula-titulo">Plazos de entrega</div>
+    <p>Duración estimada: <strong>{{DURACION}}</strong> desde la confirmación del pago del Hito 1. El plazo puede extenderse si el Cliente demora más de 3 días hábiles en aprobar entregables, si se aprueban cambios de alcance, o por causa de fuerza mayor (ver Cláusula 13).</p>
+    <p>El cronograma también se <strong>suspenderá día a día</strong> si el Cliente no entrega oportunamente insumos técnicos indispensables solicitados por el Prestador: credenciales de producción, accesos a pasarelas de pago (Kushki, Payphone, Stripe u otras), cuentas de servicios externos, o cualquier información necesaria para el avance del proyecto. El Prestador notificará la solicitud por escrito; si el Cliente no responde en <strong>3 días hábiles</strong>, el plazo se suspende automáticamente hasta la entrega del insumo.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 12</div>
+    <div class="clausula-titulo">Confidencialidad y protección de datos</div>
+    <p>Ambas partes mantienen confidencialidad sobre información del negocio, datos de clientes y detalles técnicos por <strong>2 años</strong> tras la terminación del contrato. El Prestador podrá mencionar al Cliente como referencia pública (portafolio, redes) salvo instrucción contraria expresa por escrito.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 13</div>
+    <div class="clausula-titulo">Fuerza mayor y caso fortuito</div>
+    <p>Ninguna parte será responsable por incumplimiento causado por eventos fuera de su control razonable (desastres naturales, pandemias, fallas generalizadas de internet, actos gubernamentales). La parte afectada notifica en 48 horas. Los plazos se suspenden durante el evento. Si supera 30 días, cualquiera puede terminar el contrato con liquidación proporcional.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 14</div>
+    <div class="clausula-titulo">Limitación de responsabilidad</div>
+    <p>La responsabilidad máxima del Prestador se limita al monto total pagado por el Cliente hasta la fecha del reclamo. El Prestador no es responsable por daños indirectos, lucro cesante, pérdida de datos o daños consecuentes no atribuibles directamente al desarrollo contratado.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 15</div>
+    <div class="clausula-titulo">Validez de la firma electrónica</div>
+    <p>Las partes acuerdan que la firma electrónica tiene plena validez legal conforme a la <strong>Ley de Comercio Electrónico, Firmas y Mensajes de Datos del Ecuador (Ley 67)</strong>. La firma aplicada mediante Docuseal tiene el mismo valor jurídico que una firma manuscrita. El registro de auditoría digital (timestamp, IP, huella del documento) constituye prueba suficiente del acto de firma.</p>
+    <p class="ley-ref">Base legal: Art. 14-15 Ley 67 Ecuador — Las firmas electrónicas tienen igual validez jurídica que las manuscritas.</p>
+  </div>
+
+  <div class="clausula">
+    <div class="clausula-num">Cláusula 16</div>
+    <div class="clausula-titulo">Jurisdicción y resolución de disputas</div>
+    <p>Este contrato se rige por las leyes de la <strong>República del Ecuador</strong>. Para controversias: (1) negociación directa en 15 días, (2) mediación ante centro legalmente reconocido en Ecuador, (3) tribunales competentes del Ecuador. Las partes renuncian expresamente a cualquier otro fuero.</p>
+  </div>
+
+  <!-- FIRMAS -->
+  <div class="firmas-section">
+    <div class="firmas-label">Aceptación del contrato — firmas</div>
+    <div class="firmas-grid">
+      <div>
+        <div class="firma-parte-label">Prestador de servicios</div>
+        <div class="firma-nombre">Álvaro Carrera Montalvo</div>
+        <div class="firma-rol">AlvaroDevRace · Desarrollador Independiente</div>
+        <div class="firma-campo">Firma electrónica</div>
+        <div class="firma-fecha">Fecha: ___________________________</div>
+      </div>
+      <div>
+        <div class="firma-parte-label">Cliente</div>
+        <div class="firma-nombre">{{CLIENTE_NOMBRE}}</div>
+        <div class="firma-rol">{{CLIENTE_EMPRESA}}</div>
+        <div class="firma-campo">Firma electrónica</div>
+        <div class="firma-fecha">Fecha: ___________________________</div>
+      </div>
+    </div>
+    <div class="firmas-legal">
+      Al firmar, ambas partes declaran haber leído, comprendido y aceptado íntegramente las 16 cláusulas de este contrato. Suscrito mediante firma electrónica con plena validez legal bajo la Ley de Comercio Electrónico del Ecuador (Ley 67). El registro de auditoría generado por Docuseal (timestamp, dirección IP, huella digital del documento) constituye evidencia vinculante del acto de firma desde el momento en que ambas partes suscriben.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-brand">Álvaro Carrera <span>·</span> AlvaroDevRace</div>
+  <div class="footer-meta">
+    Contrato N° {{CONTRATO_NUMERO}} · {{CONTRATO_FECHA}}<br>
+    Firmado digitalmente vía Docuseal · Ley 67 Ecuador
+  </div>
+</div>
+
+</body>
+</html>
