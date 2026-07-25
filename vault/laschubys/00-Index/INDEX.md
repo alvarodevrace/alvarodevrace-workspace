@@ -1,8 +1,8 @@
 # Las Chubys — Índice Wiki
 
-> **Estado Infra**: ✅ VPS recuperado — 2026-07-21: VPS Hostinger estuvo caído desde 2026-07-12 por hypervisor-initiated shutdown; encendido manualmente y todos los servicios responden 200. Watchdog local macOS implementado para detectar futuras caídas (`scripts/vps-health-check.sh`). Entorno local dev estabilizado — 2026-07-13: `.env` del back apunta a Supabase develop, SSR front carga `.env` vía `dotenv`, throttle global desactivado en dev. Cambios locales unstaged pendientes de commit.
-> **Listo para**: Validar en browser real errores de CSP; validar ejecución automática del backup script (cron 03:00); monitorear workflows n8n; commit local de fixes dev y crear PRs.
-> **Último trabajo**: Recuperación VPS caído + watchdog local macOS. Registrado en [LOG.md](../10-Log/LOG.md).
+> **Estado Infra**: ✅ Front y back de Las Chubys desplegados en Dokploy (`laschubys-app` y `laschubys-api` healthy). Linktree con Huellas de Paz activo en producción.
+> **Listo para**: Validación visual en móvil real; purgar cache de Cloudflare si la imagen nueva no se refleja.
+> **Último trabajo**: Linktree Huellas de Paz (botón + panel deslizable + 5 cursos + código descuento) + deploys front/back. Registrado en [LOG.md](../10-Log/LOG.md).
 
 ---
 

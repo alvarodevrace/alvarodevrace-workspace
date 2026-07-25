@@ -3,6 +3,32 @@
 Registro append-only. Formato: `## [YYYY-MM-DD] [AGENTE] | operación`
 Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 
+## [2026-07-24] KIMICO | Linktree Huellas de Paz + deploys front/back
+
+**Agente:** KIMICO (TRIN)
+**Ambiente:** prod
+**Tareas:**
+- Linktree `/linktree`: añadido botón "Huellas de Paz" con icono de huella morada y panel deslizable.
+- Panel de cursos: imagen promocional, código descuento `LASCHUBYS50`, 5 enlaces a cursos/ebooks/Hotmart.
+- Ajustes visuales: logo Las Chubys en panel principal, texto "Reality y parodias felinas" en negrita, márgenes entre elementos, footer oculto en panel de cursos y anclado sin scroll en principal.
+- Reordenado: botón Huellas de Paz pasa a ser el primero de la lista.
+- Verificación deploy back `laschubys-api`: GitHub Actions #52 terminó limpio; Dokploy tardó en aplicar el cambio; redeploy forzado vía API y contenedor reiniciado correctamente.
+**Commits:**
+- Front: `7f7151b` — `fix(linktree): coloca botón Huellas de Paz primero en la lista`
+- Back: mergeado vía PR #52 (`0b6a9e3`)
+**PRs:**
+- `alvarodevrace/laschubys-app#64` ✅ mergeado
+- `alvarodevrace/laschubys-api#52` ✅ mergeado
+**Deploys:** ✅ front y back desplegados en Dokploy.
+**Smoke test:** ✅ `https://laschubys.com/linktree` 200; `https://api.laschubys.com/api/health` 200.
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Validar visualmente `/linktree` en móvil real.
+- Revisar si se requiere purgar cache de Cloudflare para la imagen nueva de Huellas de Paz.
+**Vault lint:** ✅ sin issues.
+
+---
+
 ## [2026-07-21] KIMICO | Recuperación VPS caído + watchdog local macOS
 
 **Agente:** KIMICO (TRIN)
@@ -579,3 +605,26 @@ Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 - `/api/health` responde `ok` ✅.
 - `/api/health/ready` responde `ok` ✅.
 - Smoke test local de Playwright: 3/3 passed ✅.
+
+---
+
+## 2026-07-20 — Front navigation + recuperación n8n
+
+**Agente:** TRIN
+**Ambiente:** dev (front) / prod (n8n)
+**Tareas:**
+- Front: header navigation más ancho (`w-[calc(100%-4rem)]`), opciones simplificadas a 6 enlaces directos, Blog renombrado a Comunidad.
+- n8n: restauración completa desde backup `n8n-db-20260712.sql` (8 workflows, estado al 12 julio).
+- n8n: migración de 10 credenciales desde SQLite histórico (`/opt/dokploy-data/backups/n8n/database.sqlite`) a PostgreSQL.
+- Backup manual de hoy: `n8n-db-20260720.sql`, `workflows-20260720.json`, `laschubys-20260720.sql` → Google Drive.
+**Commits:** cambios locales unstaged en `LasChubys-Front` rama `develop`.
+**PRs:** ninguno creado.
+**Deploys:** N/A.
+**Smoke test:** N/A.
+**Bloqueos:**
+- Workflow `LCH / Sentry / Alert` no restaurado: se creó después del backup del 12 julio y requiere recreación manual.
+**Pendientes mañana:**
+- Crear PR front con cambios de navigation.
+- Recrear workflow `LCH / Sentry / Alert` en n8n.
+- Verificar que cron diario de backups VPS siga generando sin errores.
+**Vault lint:** ✅ sin issues.
