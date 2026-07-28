@@ -1,8 +1,9 @@
-# CrossFit Platform — Design Spec
+# CrossFit Platform — Project Scope
 
 **Fecha:** 2026-07-28  
-**Estado:** Aprobado para plan de implementación  
+**Estado:** Documento maestro de alcance — sujeto a iteración  
 **Autor:** TRIN + AlvaroDevRace  
+**Propósito del documento:** Base técnica y de negocio del proyecto. Se pulirá antes de cualquier implementación.  
 
 ## 1. Propósito
 
