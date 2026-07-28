@@ -1,0 +1,99 @@
+--- docs/superpowers/sdd/diffs/task-1-before.md	2026-06-24 21:59:54
++++ vault/INFRA-GLOBAL-2026-06.md	2026-06-24 22:02:10
+@@ -1,6 +1,7 @@
+ # Infraestructura Global — Estado Real 2026-06-05
+ 
+-> Fuente de verdad para infra compartida entre todos los proyectos.
++> **Fuente de verdad única (SSOT)** para infra compartida entre todos los proyectos.
++> Si otro archivo del vault repite estos datos, la versión vigente es este archivo.
+ > Reemplaza a `vault/INFRA-GLOBAL.md` (versión desactualizada).
+ 
+ ---
+@@ -14,9 +15,18 @@
+ | laschubys.com | `b1bd4dda49d48900eecb9228673ef1e9` |
+ 
+ **Tunnel VPS:** `alvarodevrace-vps` | ID: `49dc4a63-adb2-4c5e-a53c-07dfecd7ab4a`
++**Estado Tunnel:** ✅ Activo
+ 
+ **Regla DNS:** Todo DNS en Cloudflare. No tocar Hostinger hPanel.
+ 
++**Tokens:**
++| Token | Permisos | Ubicación |
++|-------|----------|-----------|
++| Admin (alvarodevrace.tech) | Account + Zone edit | `bitwarden:global/cloudflare-api-token` |
++| Cache Purge (laschubys.com) | Zone:Cache Purge | `bitwarden:global/cloudflare-cache-purge-token` |
++
++**⚠️ Hallazgo:** El token de `laschubys.com` solo tiene permisos de cache purge. No puede leer zona vía API. Para admin DNS completo se necesita el token global en Bitwarden.
++
+ ---
+ 
+ ## Nodos
+@@ -66,6 +76,10 @@
+ | Uptime Kuma | https://status.alvarodevrace.tech | `KDRlcDa9e8vPHgzXUE0a3` | ✅ done |
+ | Umami | https://analytics.alvarodevrace.tech | `WBBWfwBAiodpR9CpfVBPM` | ✅ done |
+ 
++### Docuseal
++
++**Template ID:** 2 | Slug: `mPkXkD7iTpQEWo`
++
+ > **Netdata:** servicio eliminado 2026-06-10. No se usaba; Uptime Kuma cubre monitoreo.
+ > **Coolify:** migrado a Dokploy y desinstalado del VPS 2026-06-25.
+ 
+@@ -222,12 +236,20 @@
+ | Telegram Bot AlvaroDevRace | `bitwarden:global/telegram-bot-alvarodevrace` |
+ | Telegram Bot LasChubys | `bitwarden:global/telegram-bot-laschubys` |
+ | Docuseal API Key | `bitwarden:global/docuseal-api-key` |
++| n8n Service Password | `bitwarden:global/n8n-service-password` |
++| Gemini API Key | `bitwarden:global/gemini-api-key` |
++| Mistral API Key | `bitwarden:global/mistral-api-key` |
++| OpenRouter API Key | `bitwarden:global/openrouter-api-key` |
++| Telegram Chat ID (alvarodevrace) | `bitwarden:global/telegram-chat-id-alvarodevrace` |
+ | Minio User | `bitwarden:global/minio-user` |
+ | SSH root VPS | `bitwarden:global/ssh-root-vps` (key-based) |
+ | SSH alvaro Dell | `bitwarden:global/ssh-alvaro-dell` |
+ 
+ **Bitwarden folder:** `AlvaroDevRace - Global` (ID: `e5771472-4552-4de0-8962-b452012b1d69`)
+ 
++**Desbloqueo:** `bw unlock` con email `alcarreram@hotmail.com`.
++**Clave Age pública:** `age19kgpxyhgn8c0tv28lvqe0zws5k0pwhwnp79vsyy0tl2f0hjp0fps734wv6`
++
+ > **Eliminado 2026-06-24:** `s3s.casabaca.com` (carpeta Personal, obsoleto). Total de items: 19.
+ 
+ ---
+@@ -321,6 +343,8 @@
+ 
+ ## ~~Evolution API — WhatsApp~~ ✅ ELIMINADO 2026-06-06
+ 
++> **Pendiente:** limpiar registro DNS huérfano `evolution.alvarodevrace.tech` si aún existe.
++
+ **URL:** ~~https://evolution.alvarodevrace.tech~~ → DNS limpio (NXDOMAIN)
+ 
+ **Investigación VPS (auditoría final 2026-06-06):**
+@@ -362,27 +386,8 @@
+ 
+ ---
+ 
+-## Cloudflare — DNS + Tunnel
+ 
+-**Zonas:**
+-| Dominio | Zone ID |
+-|---------|---------|
+-| alvarodevrace.tech | `2a17143e03abfec70bd29db73b74fecf` |
+-| laschubys.com | `b1bd4dda49d48900eecb9228673ef1e9` |
+ 
+-**Tunnel VPS:** `alvarodevrace-vps` | ID: `49dc4a63-adb2-4c5e-a53c-07dfecd7ab4a`  
+-**Estado Tunnel:** ✅ Activo
+-
+-**Tokens:**
+-| Token | Permisos | Ubicación |
+-|-------|----------|-----------|
+-| Cache Purge (laschubys.com) | Zone:Cache Purge | `vault/laschubys/40-Credentials/INFRA.md` → Bitwarden |
+-| Admin (alvarodevrace.tech) | Account + Zone edit | `bitwarden:global/cloudflare-api-token` |
+-
+-**⚠️ Hallazgo:** El token de `laschubys.com` solo tiene permisos de cache purge. No puede leer zona vía API. Para admin DNS completo se necesita el token global en Bitwarden.
+-
+----
+-
+ ## Resend — Email Transaccional
+ 
+ **Dominio:** alvarodevrace.tech  

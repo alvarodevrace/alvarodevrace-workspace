@@ -1,5 +1,49 @@
 # LOG — AlvaroDevRace (Sistema Freelancer)
 
+## [2026-07-21] TRIN | Auditoría multi-IA + diseño de `kimico-system`
+
+**Agente:** TRIN
+**Ambiente:** dev
+**Tareas:**
+- Auditoría comparativa entre sistema AlvaroDevRace y Gentleman Programming AI (GitHub).
+- Investigación de repos Gentleman: `gentle-ai`, `engram`, `gentle-pi`, `Gentleman-Skills`.
+- Auditoría interna: skills duplicadas, agentes, vault, infra, Engram.
+- Definición de repo público `kimico-system`: kit portable multi-IA (Kimi + Claude) con agentes, skills, memoria Engram y vault template.
+- Escritura de design spec en `docs/superpowers/specs/2026-07-21-kimico-system-design.md`.
+**Commits:** Ninguno (solo planificación).
+**PRs:** Ninguno.
+**Deploys:** N/A.
+**Smoke test:** N/A.
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Revisar y aprobar design spec.
+- Iniciar Fase 1: limpieza de skills/catálogo en AlvaroDevRace.
+- Crear repo `github.com/alvarodevrace/kimico-system`.
+**Vault lint:** N/A.
+
+---
+
+## [2026-07-21] TRIN | Incidente VPS Hostinger caído + watchdog local macOS
+
+**Agente:** TRIN
+**Tareas:**
+- Detectado VPS Hostinger (`72.60.26.201`) caído desde 2026-07-12T21:35-05:00. Root cause: hypervisor-initiated shutdown. No hubo notificación previa de Hostinger.
+- Recuperación manual: VPS encendido, Tailscale y Cloudflare Tunnel reconectados, todos los servicios públicos responden 200.
+- Acceso SSH root al VPS recuperado con password `@lv4r0C4rr3r4`; guardada en Bitwarden (`global/ssh-root-vps`).
+- Implementado watchdog local en macOS para detectar caídas del VPS: script de health check + LaunchAgent + installer en `scripts/`.
+- Verificación: script silencioso en estado healthy, notificación nativa de macOS al simular falla, anti-spam de 60 min.
+**Commits:** `73b63d3`, `161436b`, `2b855bc`, `f567f91`, `a04824f`, `df4e57f`, `ade9dbd`.
+**PRs:** Ninguno — a espera de Álvaro.
+**Deploys:** N/A.
+**Smoke test:** ✅ Todas las URLs críticas responden 200.
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Definir si se añade watchdog secundario 24/7 (Dell o servicio externo).
+- Revisar panel Hostinger para entender por qué el hypervisor forzó el shutdown.
+**Vault lint:** ✅ sin issues.
+
+---
+
 ## [2026-07-10] TRIN | Mantenimiento infra global: Dokploy + Uptime Kuma + Planka
 
 **Agente:** TRIN

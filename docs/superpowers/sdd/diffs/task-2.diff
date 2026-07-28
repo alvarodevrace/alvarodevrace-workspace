@@ -1,0 +1,150 @@
+--- docs/superpowers/sdd/diffs/task-2-before.md	2026-06-24 22:03:11
++++ agents/KIMI-AGENTS.md	2026-06-24 22:05:04
+@@ -39,67 +39,30 @@
+ 
+ ## Tabla Maestra de Proyectos
+ 
+-| Proyecto | Vault | Supabase Schema | Dokploy project ID | Planka Board | n8n prefix | Stack | Estado cliente |
+-|----------|-------|----------------|-------------------|--------------|-----------|-------|---------------|
+-| laschubys | `vault/laschubys/` | `laschubys` | `dcZfubBCdj1wno5hroswj` | `1762811413849441959` | `WF-LCH-*` | Angular 21 SSR + NestJS BFF | ✅ Activo |
+-| portfolio | `vault/portfolio/` | — | `oSVdXwFYGekg16v18XNW1` | `1739527870750917748` | — | Angular 18 (objetivo 21) | Tuyo |
+-| alvarodevrace | `vault/alvarodevrace/` | — | — | `1780675948073452736` | `WF-ADR-*` | Infra global / Freelance system | Interno |
++> IDs Dokploy, URLs e IPs globales: `vault/INFRA-GLOBAL-2026-06.md`
+ 
++| Proyecto | Vault | Supabase Schema | Planka Board | n8n prefix | Stack | Estado cliente |
++|----------|-------|----------------|--------------|-----------|-------|---------------|
++| laschubys | `vault/laschubys/` | `laschubys` | `1762811413849441959` | `WF-LCH-*` | Angular 21 SSR + NestJS BFF | ✅ Activo |
++| portfolio | `vault/portfolio/` | — | `1739527870750917748` | — | Angular 18 (objetivo 21) | Tuyo |
++| alvarodevrace | `vault/alvarodevrace/` | — | `1780675948073452736` | `WF-ADR-*` | Infra global / Freelance system | Interno |
++
+ ## Backlog (código local, sin vault)
+ 
+ _Sin proyectos en backlog._
+ 
+ ## Proyectos eliminados
+ 
+-| Proyecto | Vault | Supabase Schema | Dokploy project ID | Stack | Notas |
+-|----------|-------|----------------|-------------------|-------|-------|
+-| ~~agentoffice~~ | ~~eliminado~~ | — | — | React 19 + Vite | Proyecto descartado 2026-06-24 |
+-| ~~cobroslatam~~ | ~~eliminado~~ | — | — | Content/SEO | Proyecto descartado 2026-06-24 |
+-| ~~utilboxes~~ | ~~eliminado~~ | — | — | Content/SEO | Proyecto descartado 2026-06-24 |
+-| ~~brain~~ | ~~eliminado~~ | ~~`brain`~~ | ~~—~~ | ~~Angular PWA~~ | Eliminado previamente |
+-| ~~agrovivas~~ | ~~eliminado~~ | ~~`agrovivas`~~ | ~~—~~ | ~~Angular 21 + NestJS~~ | Proyecto descartado 2026-06-24 |
+-| ~~jauria~~ | ~~eliminado~~ | ~~`jauria`~~ | ~~—~~ | ~~Angular + NestJS~~ | Cliente en standby; código eliminado 2026-06-25 |
+-
+-**Credenciales por proyecto:** `vault/<proyecto>/40-Credentials/INFRA.md` (referencias, no valores)
+-
+----
+-
+-## Infraestructura Compartida — Estado Real 2026-06-25
+-
+-| Servicio | URL | Estado real | Notas |
+-|----------|-----|-------------|-------|
+-| Dokploy | http://100.105.133.25:3000 | ✅ | Orquestador principal (panel `dokploy.alvarodevrace.tech`) |
+-| n8n | https://n8n.alvarodevrace.tech | ✅ `{"status":"ok"}` | Automatizaciones |
+-| Supabase | https://db.alvarodevrace.tech | ✅ | Self-hosted, schemas por proyecto |
+-| Docuseal | https://docuseal.alvarodevrace.tech | ✅ HTTP 200 | E-firma contratos |
+-| Uptime Kuma | https://status.alvarodevrace.tech | ✅ HTTP 302 | Monitoreo URLs |
+-| Umami | https://analytics.alvarodevrace.tech | ✅ running:healthy | Analytics web |
+-| Planka | https://planka.alvarodevrace.tech | ✅ HTTP 200 | Tickets (Dell, solo jornada) |
+-| Crawl4AI | https://crawl4ai.alvarodevrace.tech | ✅ | Scraping (Dell) |
+-| Gotenberg | https://gotenberg.alvarodevrace.tech | ✅ | PDF (Dell) |
+-| Cloudflare DNS | dash.cloudflare.com | ✅ | DNS + Tunnel |
+-| ~~**Evolution API**~~ | ~~https://evolution.alvarodevrace.tech~~ | ✅ **ELIMINADO** | **Todos los rastros borrados del VPS 2026-06-06** |
+-| ~~**Coolify**~~ | ~~https://coolify.alvarodevrace.tech~~ | ✅ **ELIMINADO** | **Migrado a Dokploy y desinstalado 2026-06-25** |
+-
+-### ❌ Eliminados / Caídos
+-
+-| Servicio | Estado | Razón |
+-|----------|--------|-------|
+-| GlitchTip | Eliminado 2026-06-05 | Reemplazado por Sentry SaaS ✅ activo en laschubys-app y laschubys-api |
+-| Jauria containers | Eliminados de Dokploy | Cliente en standby |
+-| CobrosLatam app | Eliminado 2026-06-24 | Proyecto descartado |
+-| UtilBoxes app | Eliminado 2026-06-24 | Proyecto descartado |
+-| AgentOffice app | Eliminado 2026-06-24 | Proyecto descartado |
+-
+----
+-
+-## Nodos
++| Proyecto | Vault | Supabase Schema | Stack | Notas |
++|----------|-------|----------------|-------|-------|
++| ~~agentoffice~~ | ~~eliminado~~ | — | React 19 + Vite | Proyecto descartado 2026-06-24 |
++| ~~cobroslatam~~ | ~~eliminado~~ | — | Content/SEO | Proyecto descartado 2026-06-24 |
++| ~~utilboxes~~ | ~~eliminado~~ | — | Content/SEO | Proyecto descartado 2026-06-24 |
++| ~~brain~~ | ~~eliminado~~ | ~~`brain`~~ | ~~Angular PWA~~ | Eliminado previamente |
++| ~~agrovivas~~ | ~~eliminado~~ | ~~`agrovivas`~~ | ~~Angular 21 + NestJS~~ | Proyecto descartado 2026-06-24 |
++| ~~jauria~~ | ~~eliminado~~ | ~~`jauria`~~ | ~~Angular + NestJS~~ | Cliente en standby; código eliminado 2026-06-25 |
+ 
+-| Nodo | IP pública | Tailscale | RAM | Disco | Rol |
+-|------|-----------|-----------|-----|-------|-----|
+-| VPS Hostinger | 72.60.26.201 | `100.105.133.25` | 7.8 GB | 96 GB | Producción 24/7 |
+-| Dell zion-node | 192.168.1.20 | `100.88.228.17` | 7.6 GB | 457 GB SSD | Herramientas internas (solo jornada) |
+-| MacBook | — | `100.83.137.17` | — | — | Desarrollo local |
++**Credenciales por proyecto:** `vault/<proyecto>/40-Credentials/INFRA.md` (solo si hay datos propios; globales en `vault/INFRA-GLOBAL-2026-06.md`).
+ 
+ ---
+ 
+@@ -227,63 +190,6 @@
+ 
+ ---
+ 
+-## Cloudflare — DNS + Tunnel
+-
+-**Zonas:**
+-| Dominio | Zone ID |
+-|---------|---------|
+-| alvarodevrace.tech | `2a17143e03abfec70bd29db73b74fecf` |
+-| laschubys.com | `b1bd4dda49d48900eecb9228673ef1e9` |
+-
+-**Tunnel VPS:** `alvarodevrace-vps` | ID: `49dc4a63-adb2-4c5e-a53c-07dfecd7ab4a`
+-
+----
+-
+-## Secretos maestros (referencias)
+-
+-| Secreto | Referencia Bitwarden |
+-|---------|---------------------|
+-| Dokploy API Key | `bitwarden:global/dokploy-api-token` |
+-| Cloudflare API Token | `bitwarden:global/cloudflare-api-token` |
+-| Supabase JWT Secret | `bitwarden:global/supabase-jwt-secret` |
+-| Supabase Service Role | `bitwarden:global/supabase-service-role-key` |
+-| Supabase Anon Key | `bitwarden:global/supabase-anon-key` |
+-| Supabase Postgres Pass | `bitwarden:global/supabase-postgres-password` |
+-| Google OAuth Client ID | `bitwarden:global/google-oauth-client-id` |
+-| Google OAuth Secret | `bitwarden:global/google-oauth-client-secret` |
+-| Planka Password | `bitwarden:global/planka-password` |
+-| Telegram Bot Generic | `bitwarden:global/telegram-bot-generic` |
+-| Docuseal API Key | `bitwarden:global/docuseal-api-key` |
+-| SSH root VPS | `bitwarden:global/ssh-root-vps` (key-based) |
+-| SSH alvaro Dell | `bitwarden:global/ssh-alvaro-dell` |
+-
+----
+-
+-## Backups — Sistema 3-2-1
+-
+-```
+-VPS (cron 03:00) → /opt/backups/
+-    ↓ rsync (boot Dell)
+-Dell /opt/backups/vps/
+-    ↓ rclone
+-Google Drive: Backups-AlvaroDevRace/
+-```
+-
+-| Dato | Frecuencia | Archivo |
+-|------|-----------|---------|
+-| Schema laschubys | Diario | `supabase/laschubys-YYYYMMDD.sql` |
+-| n8n workflows | Diario | `n8n/workflows-YYYYMMDD.json` |
+-| n8n SQLite | Diario | `n8n/credentials-YYYYMMDD.sqlite` |
+-| Dokploy config | Boot Dell | `dokploy-config/` |
+-
+-**Scripts:**
+-- VPS `/opt/scripts/backup-generate.sh` — cron 03:00
+-- Dell `/opt/scripts/sync-backups.sh` — systemd oneshot boot
+-
+-**Retención:** VPS 30 días | Dell ilimitado | Google Drive 90 días
+-
+----
+-
+ ## Checklist de auditoría mensual (TRIN)
+ 
+ - [ ] Dokploy: revisar apps con status `error` o unhealthy

@@ -1,0 +1,33 @@
+--- docs/superpowers/sdd/diffs/task-5-before.md	2026-06-24 22:09:46
++++ vault/portfolio/40-Credentials/INFRA.md	2026-06-24 22:11:22
+@@ -4,13 +4,12 @@
+ 
+ | Servicio | URL / ID |
+ |---|---|
+-| App | https://alvarodevrace.tech |
++| App URL | Ver `vault/INFRA-GLOBAL-2026-06.md` → app `alvaro-portfolio` |
+ | GitHub repo | `alvarodevrace/alvaro-portfolio` |
+ | SSH remote | `git@github-alvarodevrace:alvarodevrace/alvaro-portfolio.git` |
+-| Dokploy project ID | `oSVdXwFYGekg16v18XNW1` |
++| Dokploy project/application IDs | Ver `vault/INFRA-GLOBAL-2026-06.md` → proyecto `portfolio` |
+ | Dokploy environment ID | `6aSWtCz4LWWvtHfYJXXMG` |
+-| Dokploy application ID | `r9HA2pNx6Uiip1sYJ8ubg` |
+-| Cloudflare zone | `alvarodevrace.tech` |
++| Cloudflare zone | Ver `vault/INFRA-GLOBAL-2026-06.md` |
+ | Formspree | endpoint del formulario de contacto (configurar en env vars) |
+ | Sentry | https://sentry.io (configurar DSN en env vars) |
+ 
+@@ -32,10 +31,11 @@
+ ## Dokploy — Deploy manual
+ 
+ ```bash
++APP_ID="<ver INFRA-GLOBAL-2026-06.md>"
+ curl -X POST -H "Content-Type: application/json" \
+   -H "x-api-key: $DOKPLOY_API_KEY" \
+-  -d '{"applicationId":"r9HA2pNx6Uiip1sYJ8ubg"}' \
+-  "http://100.105.133.25:3000/api/application.deploy"
++  -d "{\"applicationId\":\"$APP_ID\"}" \
++  "https://dokploy.alvarodevrace.tech/api/application.deploy"
+ ```
+ 
+ ## Stack PIXEL

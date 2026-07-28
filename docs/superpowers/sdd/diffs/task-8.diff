@@ -1,0 +1,667 @@
+--- docs/superpowers/sdd/diffs/task-8-before-global.md	2026-06-24 22:17:28
++++ /Users/alvarocarreramontalvo/.kimi-code/skills/KIMI-MASTER-SKILLS.md	2026-06-24 22:19:29
+@@ -1,512 +1,192 @@
+-# KIMI MASTER SKILLS — Sistema Multi-Agente Álvaro DevRace
+-> Única fuente de verdad para skills, roles y capacidades de Kimi y subagentes.
+-> Actualizado: 2026-06-11
++# KIMI-SKILLS-MASTER — Catálogo Maestro de Skills
+ 
++> **Fuente de verdad:** skills disponibles para KIMICO y subagentes del enjambre.
++> **Vigente:** 2026-06-11
++> **Scope:** User skills en `~/.kimi-code/skills/` + skills locales de proyectos.
++
+ ---
+ 
+-## 1. ROLES DE AGENTES NATIVOS
++## 1. Propósito
+ 
+-### KIMICO / KIMI-TRIN (Orquestador / Platform Architect / CRM)
+-- **Herramienta:** Kimi Code
+-- **Responsabilidades:**
+-  - Infraestructura: Coolify, deploys, secretos, Supabase schema, RLS, RPCs
+-  - Orquestación: decide dueño correcto de tareas, resuelve bloqueos, handoffs
+-  - CRM: cotizaciones Notion, contratos Docuseal, hitos de pago
+-  - Intervención cross-layer en incidentes complejos
+-  - Protocol RX obligatorio antes de DDL/RLS/pagos/RPCs críticos
+-  - Flujo Git: push develop → llamar a NOVA → PR develop→main (solo Álvaro aprueba)
+-  - Deploy manual de emergencia via Coolify API
+-  - Scraping con Crawl4AI para análisis competitivo/diseño
+-- **Prompt de activación:** `prompts/KIMI-BOOT.md` + `agents/kimi/TRIN.md`
+-- **Skills asignadas:**
+-  - `token-optimizer` — eficiencia de contexto
+-  - `start-of-day` — ritual de inicio
+-  - `sprint-review` — revisión de sprint
+-  - `tech-debt-tracker` — seguimiento deuda técnica
+-  - `team-handoff` — handoffs entre agentes
+-  - `supabase-schema-governor` — gobernanza de schema Supabase
+-  - `supabase-qa` — QA de cambios Supabase
+-  - `security-review` — auditoría de seguridad
+-  - `security-rotator` — rotación de secretos
+-  - `release-orchestrator` — orquestación de releases
+-  - `post-mortem` — análisis post-incidente
+-  - `planka-workflow` — gestión de tickets Planka
+-  - `observability-check` — chequeo de observabilidad
+-  - `n8n-incident-router` — enrutamiento de incidentes n8n
+-  - `n8n-change-safety` — protocolo de seguridad para cambios n8n en emergencia
+-  - `issue-router` — enrutamiento de issues a agente correcto
+-  - `infra-triage` — triage de infraestructura
+-  - `dependency-audit` — auditoría de dependencias
+-  - `daily-status` — estado diario
+-  - `coolify-manager` — gestión de Coolify
+-  - `context-sync` — sincronización de contexto
+-  - `blocker-escalate` — escalación de bloqueos
+-  - `agent-qa-gate` — gate de calidad antes de aceptar entregables de PIXEL/LINK
+-  - `adr-record` — registro de decisiones arquitectónicas
+-  - `sre-runbook` — playbooks operativos para incidentes
+-  - `all-skills-catalog` — catálogo maestro de skills (este archivo)
++Este archivo es el catálogo único de capacidades que Kimico (TRIN) debe inyectar a los subagentes del swarm según su rol. Ningún subagente debe trabajar sin las skills de su área cargadas en su prompt.
+ 
+-> **Nota:** Para el listado completo de 51+ skills disponibles y su inyección a subagentes, ver `kimi-all-skills-catalog.md`.
++---
+ 
+-### KIMI-PIXEL (Fullstack + Mobile Engineer)
+-- **Herramienta:** Kimi Code
+-- **Responsabilidades:**
+-  - Apps Angular 21 + NestJS BFF: código, lógica de negocio, API routes
+-  - Mobile: Capacitor 7, builds iOS/Android
+-  - UI/UX, componentes, estilos, animaciones
+-  - Tests unitarios y de integración
+-  - Stack EXCLUSIVO: Angular 21 para todo front (sin excepciones)
+-  - Leyes de calidad: zoneless, SSR en landings, tipado estricto, DestroyRef, `resource()`, `@defer`, DI con `inject()`, Tailwind
+-  - Coordinación con AURA para componentes visuales nuevos
+-  - Crawl4AI para scraping de diseños de referencia
+-- **Prompt de activación:** `agents/kimi/PIXEL.md`
+-- **Skills asignadas:**
+-  - `angular-admin-demo-hardening` — hardening pre-commit Angular 21
+-  - `angular-senior` — patrones avanzados Angular
+-  - `angular-ssr-security` — checklist seguridad Angular SSR
+-  - `astro-senior` — patrones Astro (legacy proyectos antiguos)
+-  - `async-loading-fail-safe` — patrones async seguros
+-  - `crawl4ai-design-scraper` — scraping de diseños para replicar en Angular
+-  - `mutation-idempotency-guard` — prevención de doble-submit y mutaciones duplicadas
+-  - `nestjs-security-hardening` — checklist seguridad NestJS
+-  - `nestjs-senior` — patrones NestJS 11 para BFFs
++## 2. Skills de Usuario — `~/.kimi-code/skills/`
+ 
+-### KIMI-LINK (n8n Automation Engineer)
+-- **Herramienta:** Kimi Code
+-- **Responsabilidades:**
+-  - Flujos n8n, webhooks, ejecuciones, integraciones externas
+-  - Instancia única: `https://n8n.alvarodevrace.tech`
+-  - Naming: `WF-<PRY>-<DESCRIPCION_CORTA>`
+-  - Versionado: exportar JSON antes de cambios, guardar en `vault/<proyecto>/30-Product/n8n/`
+-  - Validar con ejecuciones reales — nunca simuladas
+-  - Pruning: 30 días / máx 1000 ejecuciones
+-- **Prompt de activación:** `agents/kimi/LINK.md`
+-- **Skills asignadas:**
+-  - `link-n8n-master` — skill maestra de n8n
+-  - `n8n-code-javascript` — código JavaScript en nodos Code
+-  - `n8n-code-python` — código Python en nodos Code
+-  - `n8n-execution-debugger` — debug de ejecuciones fallidas
+-  - `n8n-expression-syntax` — sintaxis de expresiones n8n
+-  - `n8n-mcp-tools-expert` — uso de herramientas MCP en n8n
+-  - `n8n-node-configuration` — configuración de nodos
+-  - `n8n-node-safety` — patrones seguros de configuración
+-  - `n8n-validation-expert` — interpretación de errores de validación
+-  - `n8n-workflow-patterns` — patrones arquitectónicos de workflows
++Todas disponibles automáticamente para Kimico. Se invocan por nombre (`kimi-<nombre>`).
+ 
+-### KIMI-NOVA (QA & Testing Engineer)
+-- **Herramienta:** Kimi Code
+-- **Responsabilidades:**
+-  - Tests E2E (Playwright), tests unitarios (Jest + Angular Testing Library)
+-  - Lighthouse CI con umbrales mínimos (Performance ≥85, Accessibility=100, SEO≥90, BP≥90)
+-  - Reportes de bugs en Planka con pasos reproducibles
+-  - Activación: TRIN dice "listo para PR" o "QA listo en develop"
+-  - NOVA nunca modifica código de producción
+-- **Prompt de activación:** `agents/kimi/NOVA.md`
+-- **Skills asignadas:**
+-  - `agent-qa-gate` — gate de calidad antes de aceptar entregables de PIXEL/LINK
+-  - `playwright-e2e-angular` — E2E con Playwright + Angular SSR
+-  - `supabase-contract-verifier` — verificar schema real antes de escribir código (usada por NOVA en validación de cambios PIXEL)
++### 2.1 KIMI-TRIN (Orquestador / Infra / CRM)
+ 
+-### KIMI-AURA (UI Design Engineer)
+-- **Herramienta:** Kimi Code
+-- **Responsabilidades:**
+-  - Design system: tokens CSS, tipografía, paletas, espaciado, sombras
+-  - Diseños UX/UI en Figma (estructura: 01-Tokens / 02-Components / 03-Screens / 04-Archive)
+-  - Componentes Angular standalone visuales (shells sin lógica)
+-  - Layouts responsive y mobile-first
+-  - Coordinación con PIXEL: AURA diseña → Álvaro aprueba → AURA implementa shell → PIXEL integra lógica
+-  - PIXEL no crea componentes visuales desde cero
+-- **Prompt de activación:** `agents/kimi/AURA.md`
+-- **Skills asignadas:**
+-  - `crawl4ai-design-scraper` — scraping de diseños de referencia para replicar en Angular
+-  - `figma-extraction` — extracción de diseños, tokens y assets desde Figma
++| Skill | Archivo | Uso |
++|---|---|---|
++| `adr-record` | `kimi-adr-record.md` | Crear ADR en `vault/<proyecto>/20-Tech/ADR/`. |
++| `blocker-escalate` | `kimi-blocker-escalate.md` | Protocolo de desbloqueo de agentes. |
++| `csrf-csp-hardening` | `kimi-csrf-csp-hardening.md` | Hardening de CSP + CSRF fullstack. |
++| `daily-status` | `kimi-daily-status.md` | Standup diario global. |
++| `dependency-audit` | `kimi-dependency-audit.md` | Mapear blast radius cross-layer. |
++| `infra-triage` | `kimi-infra-triage.md` | Triage de incidentes sin owner. |
++| `issue-router` | `kimi-issue-router.md` | Decidir dueño de tarea. |
++| `n8n-change-safety` | `kimi-n8n-change-safety.md` | Intervención de emergencia en n8n. |
++| `n8n-incident-router` | `kimi-n8n-incident-router.md` | Clasificar incidentes n8n vs otros bordes. |
++| `observability-check` | `kimi-observability-check.md` | Auditar monitoreo post-deploy. |
++| `planka-workflow` | `kimi-planka-workflow.md` | Gestión de tickets Planka. |
++| `post-mortem` | `kimi-post-mortem.md` | Retrospectiva post-incidente. |
++| `release-orchestrator` | `kimi-release-orchestrator.md` | Checklist de release y deploy. |
++| `security-review` | `kimi-security-review.md` | Auditoría trimestral de seguridad. |
++| `security-rotator` | `kimi-security-rotator.md` | Rotación de secretos. |
++| `sprint-review` | `kimi-sprint-review.md` | Cierre de sprint semanal. |
++| `sre-runbook` | `kimi-sre-runbook.md` | Playbooks operativos de incidentes. |
++| `start-of-day` | `kimi-start-of-day.md` | Ritual de boot de sesión. |
++| `supabase-contract-verifier` | `kimi-supabase-contract-verifier.md` | Verificar schema real antes de código. |
++| `supabase-qa` | `kimi-supabase-qa.md` | Checklist de seguridad antes de SQL/schema. |
++| `supabase-schema-governor` | `kimi-supabase-schema-governor.md` | Gobernanza de migraciones Supabase. |
++| `supabase-types-sync` | `kimi-supabase-types-sync.md` | Sync de tipos Supabase ↔ TypeScript. |
++| `team-handoff` | `kimi-team-handoff.md` | Protocolo de traspaso entre agentes. |
++| `tech-debt-tracker` | `kimi-tech-debt-tracker.md` | Descubrir y priorizar deuda técnica. |
++| `token-optimizer` | `kimi-token-optimizer.md` | Reglas de eficiencia de contexto. |
++| `context-sync` | `kimi-context-sync.md` | Sincronizar vault Karpathy y HANDOFF.md. |
+ 
+-### KIMI-EVA (Docs & Intelligence Lead / Librarian)
+-- **Herramienta:** Kimi Code
+-- **Responsabilidades:**
+-  - Todo `vault/` — indexar, mantener, limpiar
+-  - Procesar dumps de `temp/` → `20-Tech/` / `30-Product/` → `00-Index/INDEX.md` → `10-Log/LOG.md`
+-  - `system/HANDOFF.md` y `system/SESSION_LOG.md` — compactar cuando aplique
+-  - EVA no crea dump propio: su trabajo queda directamente en el vault
+-  - Lint semanal: detectar contradicciones, claims desactualizados, páginas huérfanas
+-  - Actualización de credenciales: solo referencias, nunca valores
+-- **Prompt de activación:** `agents/kimi/EVA.md`
+-- **Skills asignadas:**
+-  - `context-sync` — sincronización de vault Karpathy y HANDOFF.md
+-  - `token-optimizer` — eficiencia de contexto
++### 2.2 KIMI-PIXEL (Fullstack / Mobile)
+ 
+----
++| Skill | Archivo | Uso |
++|---|---|---|
++| `angular-admin-demo-hardening` | `kimi-angular-admin-demo-hardening.md` | Pre-commit hardening Angular 21. |
++| `angular-senior` | `kimi-angular-senior.md` | Patrones Angular 19/20/21. |
++| `angular-ssr-security` | `kimi-angular-ssr-security.md` | Checklist seguridad Angular SSR. |
++| `astro-senior` | `kimi-astro-senior.md` | Patrones Astro 5. |
++| `async-loading-fail-safe` | `kimi-async-loading-fail-safe.md` | Async loading seguro en Angular. |
++| `crawl4ai-design-scraper` | `kimi-crawl4ai-design-scraper.md` | Scrapear diseños para replicar en Angular. |
++| `mutation-idempotency-guard` | `kimi-mutation-idempotency-guard.md` | Prevenir doble-submit y mutaciones duplicadas. |
++| `nestjs-security-hardening` | `kimi-nestjs-security-hardening.md` | Checklist seguridad NestJS. |
++| `nestjs-senior` | `kimi-nestjs-senior.md` | Patrones NestJS 11 para BFFs. |
+ 
+-## 2. SKILLS GENÉRICAS (cualquier agente puede usar)
++### 2.3 KIMI-LINK (n8n Automation)
+ 
+-| Skill | Uso |
+-|-------|-----|
+-| `supabase-contract-verifier` | Verificar schema real Supabase antes de escribir código Angular/NestJS |
+-| `sre-runbook` | Playbooks operativos para incidentes en cualquier servicio |
++| Skill | Archivo | Uso |
++|---|---|---|
++| `link-n8n-master` | `kimi-link-n8n-master.md` | Skill maestra de n8n. |
++| `n8n-code-javascript` | `kimi-n8n-code-javascript.md` | JS en nodos Code. |
++| `n8n-code-python` | `kimi-n8n-code-python.md` | Python en nodos Code. |
++| `n8n-execution-debugger` | `kimi-n8n-execution-debugger.md` | Debug de ejecuciones fallidas. |
++| `n8n-expression-syntax` | `kimi-n8n-expression-syntax.md` | Sintaxis de expresiones n8n. |
++| `n8n-mcp-tools-expert` | `kimi-n8n-mcp-tools-expert.md` | Uso de herramientas MCP de n8n. |
++| `n8n-node-configuration` | `kimi-n8n-node-configuration.md` | Configuración de nodos. |
++| `n8n-node-safety` | `kimi-n8n-node-safety.md` | Patrones seguros de nodos n8n. |
++| `n8n-validation-expert` | `kimi-n8n-validation-expert.md` | Interpretar errores de validación. |
++| `n8n-workflow-patterns` | `kimi-n8n-workflow-patterns.md` | Patrones arquitectónicos de workflows. |
+ 
+----
++### 2.4 KIMI-NOVA (QA & Testing)
+ 
+-## 3. SKILLS NUEVAS (post-auditoría 2026-06-11)
++| Skill | Archivo | Uso |
++|---|---|---|
++| `agent-qa-gate` | `kimi-agent-qa-gate.md` | Gate de calidad antes de Done. |
++| `playwright-e2e-angular` | `kimi-playwright-e2e-angular.md` | E2E con Playwright + Angular SSR. |
+ 
+-### `nestjs-security-hardening`
+-Checklist completo de seguridad para backends NestJS:
+-- ✅ ValidationPipe global con `whitelist: true, forbidNonWhitelisted: true, transform: true`
+-- ✅ DTOs con `class-validator` para TODOS los inputs (@Body, @Query, @Param)
+-- ✅ AuthGuard/AdminGuard NestJS con `@UseGuards()` (no auth manual por método)
+-- ✅ Throttler global como APP_GUARD
+-- ✅ Helmet activo
+-- ✅ CORS restrictivo (sin `*` en prod)
+-- ✅ No `.env` en git (.gitignore completo)
+-- ✅ Sentry DSN en env var (no hardcodeado)
+-- ✅ Escape XML en sitemaps/respuestas XML
+-- ✅ No exponer mensajes de error de DB al cliente
+-- ✅ Supabase service role solo backend, RLS documentado
+-- ✅ CSRF protection en endpoints state-changing
+-- ✅ Rate limiting en auth endpoints
+-- ✅ Body size limit explícito
+-- ✅ Health check endpoint
+-- ❌ Anti-patrones: `any` en Supabase client, queries raw, secrets en código
++### 2.5 KIMI-EVA (Docs & Intelligence)
+ 
+-### `angular-ssr-security`
+-Checklist de seguridad para Angular SSR:
+-- ✅ Headers de seguridad en `server.ts`: X-Frame-Options, X-Content-Type-Options, HSTS, Referrer-Policy, Permissions-Policy, CSP
+-- ✅ Sentry DSN desde env var (no hardcodeado en main.ts)
+-- ✅ No `innerHTML` sin sanitizar
+-- ✅ No `DomSanitizer` abusivo
+-- ✅ Auth por cookies httpOnly + `withCredentials`
+-- ✅ Router guards funcionales
+-- ✅ No secrets hardcodeados
+-- ✅ SSR-safe: `isPlatformBrowser()` antes de localStorage/window
+-- ✅ Validar URLs afiliadas (solo `https://`)
+-- ✅ Sanitizar parámetros `next`/`redirect` (whitelist de paths)
+-- ✅ Rate limiting/debounce en UI (botones de submit)
+-- ❌ Anti-patrones: tokens en localStorage, `eval()`, `document.write`
++| Skill | Archivo | Uso |
++|---|---|---|
++| `context-sync` | `kimi-context-sync.md` | Sincronizar vault y HANDOFF.md. |
+ 
+----
++### 2.6 KIMI-AURA (UI Design)
+ 
+-## 4. PROTOCOLO DE USO PARA SUBAGENTES
++| Skill | Archivo | Uso |
++|---|---|---|
++| `crawl4ai-design-scraper` | `kimi-crawl4ai-design-scraper.md` | Scrapear diseños de referencia. |
++| `figma-extraction` | `kimi-figma-extraction.md` | Extraer diseños/tokens/assets de Figma. |
+ 
+-Cuando Kimi cree un subagente dinámico, debe:
++### 2.7 Genéricas / Cross-agente
+ 
+-1. **Asignarle un rol** de los 6 definidos arriba
+-2. **Inyectar las skills correspondientes** en el prompt del subagente
+-3. **Referenciar este archivo maestro** como fuente de verdad
+-4. **Aplicar Modo Ultra** (sin artículos, sin relleno, sin cortesías, máx 3 líneas fuera de código, solo español)
++| Skill | Archivo | Uso |
++|---|---|---|
++| `supabase-contract-verifier` | `kimi-supabase-contract-verifier.md` | Usada por NOVA para validar cambios PIXEL. |
++| `sre-runbook` | `kimi-sre-runbook.md` | Cualquier agente puede consultar en incidentes. |
+ 
+ ---
+ 
+-## 5. MAPA DE PROYECTOS
++## 3. Skills Locales de Proyectos
+ 
+-| Proyecto | Vault | Supabase Schema | Coolify UUID | Planka Board | n8n prefix | Stack | Estado cliente |
+-|----------|-------|----------------|--------------|--------------|-----------|-------|---------------|
+-| laschubys | `vault/laschubys/` | `laschubys` | `w7dbl4hhq1o65f408i3wi0e5` | `1762811413849441959` | `WF-LCH-*` | Angular 21 SSR + NestJS BFF | ✅ Activo |
+-| portfolio | `vault/portfolio/` | — | `owcq0qi5guhwpxnxuyafzpov` | `1739527870750917748` | — | Angular 18 (objetivo 21) | Tuyo |
+-| utilboxes | `vault/utilboxes/` | — | `zgisxnda6wvmj8lyvbjd85qe` | — | `WF-UTI-*` | Content/SEO | Tuyo |
+-| cobroslatam | `vault/cobroslatam/` | — | `trbgev04xiy896cgzyslgt82` | — | `WF-COB-*` | Content/SEO | Tuyo — ✅ running:healthy |
+-| agrovivas | `vault/agrovivas/` | `agrovivas` | — (post-demo) | `1771553311741183089` | `WF-AGV-*` | Angular 21 + NestJS | ⏳ Negociación |
+-| ~~brain~~ | ~~`vault/brain/`~~ | ~~`brain`~~ | ~~`ts4sen9uwgrg5gkgljrcu9it`~~ | ~~`1767731428776216564`~~ | — | ~~Angular PWA~~ | ~~🚫 Eliminado~~ |
+-| jauria | `vault/jauria/` | `jauria` | `w0gsw0c8goo4kwswo8ss0o8g` | `1739527743269241894` | `WF-JAU-*` | Angular + NestJS | 🚫 Archivado |
+-| agentoffice | `vault/agentoffice/` | — | — | — | — | React 19 + Vite | 🚧 En dev |
+-| alvarodevrace | `vault/alvarodevrace/` | — | — | `1780675948073452736` | `WF-ADR-*` | Infra global / Freelance system | Interno |
++No están en `~/.kimi-code/skills/`; residen dentro de cada proyecto. Se deben leer directamente cuando el subagente trabaje en ese proyecto.
+ 
+-**Credenciales por proyecto:** `vault/<proyecto>/40-Credentials/INFRA.md` (referencias, no valores)
++> **Los proyectos eliminados del workspace en 2026-06-25 ya no aplican.**
+ 
+----
++### 3.1 Portfolio
+ 
+-## 6. INFRAESTRUCTURA COMPARTIDA
++| Skill | Path | Agente | Uso |
++|---|---|---|---|
++| `ui-ux-pro-max` | `Portfolio/.kimi/skills/ui-ux-pro-max/SKILL.md` | AURA | Guía UI/UX Portfolio. |
+ 
+-### Servicios Activos
++---
+ 
+-| Servicio | URL | Estado | Notas |
+-|----------|-----|--------|-------|
+-| Coolify | https://coolify.alvarodevrace.tech | ✅ | Orquestador principal |
+-| n8n | https://n8n.alvarodevrace.tech | ✅ `{"status":"ok"}` | Automatizaciones |
+-| Supabase | https://db.alvarodevrace.tech | ✅ | Self-hosted, schemas por proyecto |
+-| Docuseal | https://docuseal.alvarodevrace.tech | ✅ HTTP 200 | E-firma contratos |
+-| Uptime Kuma | https://status.alvarodevrace.tech | ✅ HTTP 302 | Monitoreo URLs |
+-| Umami | — | ✅ running:healthy | Analytics web |
+-| Planka | https://planka.alvarodevrace.tech | ✅ HTTP 200 | Tickets (Dell, solo jornada) |
+-| Crawl4AI | https://crawl4ai.alvarodevrace.tech | ✅ | Scraping (Dell) |
+-| Gotenberg | https://gotenberg.alvarodevrace.tech | ✅ | PDF (Dell) |
+-| Cloudflare DNS | dash.cloudflare.com | ✅ | DNS + Tunnel |
+-| Sentry | https://sentry.io | ✅ | SaaS, activo en laschubys-app y laschubys-api |
++## 4. Reglas de Inyección a Subagentes (Swarm)
+ 
+-### Eliminados / Caídos
++Cuando Kimico cree un subagente, debe incluir en su prompt inicial:
+ 
+-| Servicio | Estado | Razón |
+-|----------|--------|-------|
+-| ~~Evolution API~~ | ✅ **ELIMINADO 2026-06-06** | Todos los rastros borrados del VPS |
+-| ~~GlitchTip~~ | Eliminado 2026-06-05 | Reemplazado por Sentry SaaS |
+-| ~~Netdata~~ | Eliminado | — |
+-| ~~Penpot~~ | Eliminado | — |
+-
+-### Nodos
+-
+-| Nodo | IP pública | Tailscale | RAM | Disco | Rol |
+-|------|-----------|-----------|-----|-------|-----|
+-| VPS Hostinger | 72.60.26.201 | `100.105.133.25` | 7.8 GB | 96 GB | Producción 24/7 |
+-| Dell zion-node | 192.168.1.20 | `100.88.228.17` | 7.6 GB | 457 GB SSD | Herramientas internas (solo jornada) |
+-| MacBook | — | `100.83.137.17` | — | — | Desarrollo local |
++### 4.1 Prompt mínimo de activación
+ 
+-### Cloudflare — DNS + Tunnel
+-
+-| Dominio | Zone ID |
+-|---------|---------|
+-| alvarodevrace.tech | `2a17143e03abfec70bd29db73b74fecf` |
+-| laschubys.com | `b1bd4dda49d48900eecb9228673ef1e9` |
+-
+-**Tunnel VPS:** `alvarodevrace-vps` | ID: `49dc4a63-adb2-4c5e-a53c-07dfecd7ab4a`
+-
+-### Secretos Maestros (referencias Bitwarden)
+-
+-| Secreto | Referencia Bitwarden |
+-|---------|---------------------|
+-| Coolify API Token | `bitwarden:global/coolify-api-token` |
+-| Cloudflare API Token | `bitwarden:global/cloudflare-api-token` |
+-| Supabase JWT Secret | `bitwarden:global/supabase-jwt-secret` |
+-| Supabase Service Role | `bitwarden:global/supabase-service-role-key` |
+-| Supabase Anon Key | `bitwarden:global/supabase-anon-key` |
+-| Supabase Postgres Pass | `bitwarden:global/supabase-postgres-password` |
+-| Google OAuth Client ID | `bitwarden:global/google-oauth-client-id` |
+-| Google OAuth Secret | `bitwarden:global/google-oauth-client-secret` |
+-| Planka Password | `bitwarden:global/planka-password` |
+-| Telegram Bot Generic | `bitwarden:global/telegram-bot-generic` |
+-| Docuseal API Key | `bitwarden:global/docuseal-api-key` |
+-| SSH root VPS | `bitwarden:global/ssh-root-vps` (key-based) |
+-| SSH alvaro Dell | `bitwarden:global/ssh-alvaro-dell` |
+-
+-### Backups — Sistema 3-2-1
+-
+ ```
+-VPS (cron 03:00) → /opt/backups/
+-    ↓ rsync (boot Dell)
+-Dell /opt/backups/vps/
+-    ↓ rclone
+-Google Drive: Backups-AlvaroDevRace/
++Eres <AGENTE>. Operas en el proyecto <PROYECTO>.
++Lee tu rol en `agents/kimi/<AGENTE>.md` y este catálogo.
++Skills activas para esta tarea: <lista de skills por nombre>.
++Todas las skills están en `~/.kimi-code/skills/kimi-<nombre>.md`.
++Si el proyecto tiene skills locales, léelas de `<proyecto>/.kimi/skills/`.
++Modo ultra-directo. Solo español. Reporta a Kimico.
+ ```
+ 
+-| Dato | Frecuencia | Archivo |
+-|------|-----------|---------|
+-| Schema laschubys | Diario | `supabase/laschubys-YYYYMMDD.sql` |
+-| Schema jauria | Mensual | `supabase/jauria-YYYYMMDD.sql` |
+-| n8n workflows | Diario | `n8n/workflows-YYYYMMDD.json` |
+-| n8n SQLite | Diario | `n8n/credentials-YYYYMMDD.sqlite` |
+-| Coolify config | Boot Dell | `coolify-config/` |
++### 4.2 Skills por defecto por agente
+ 
+-**Retención:** VPS 30 días | Dell ilimitado | Google Drive 90 días
++| Agente | Skills base a inyectar siempre |
++|---|---|
++| **KIMI-TRIN** | `token-optimizer`, `start-of-day`, `sre-runbook`, `issue-router`, `infra-triage`, `release-orchestrator`, `observability-check`, `security-review`, `csrf-csp-hardening` |
++| **KIMI-PIXEL** | `angular-admin-demo-hardening`, `angular-senior`, `angular-ssr-security`, `async-loading-fail-safe`, `mutation-idempotency-guard`, `nestjs-security-hardening`, `nestjs-senior`, `crawl4ai-design-scraper` |
++| **KIMI-LINK** | `link-n8n-master`, `n8n-node-safety`, `n8n-workflow-patterns`, `n8n-execution-debugger`, `n8n-expression-syntax`, `n8n-code-javascript`, `n8n-code-python`, `n8n-node-configuration`, `n8n-validation-expert`, `n8n-mcp-tools-expert` |
++| **KIMI-NOVA** | `agent-qa-gate`, `playwright-e2e-angular`, `supabase-contract-verifier` |
++| **KIMI-EVA** | `context-sync`, `token-optimizer` |
++| **KIMI-AURA** | `crawl4ai-design-scraper`, `figma-extraction` |
+ 
+-**Scripts:**
+-- VPS `/opt/scripts/backup-generate.sh` — cron 03:00
+-- Dell `/opt/scripts/sync-backups.sh` — systemd oneshot boot
++### 4.3 Skills adicionales por tipo de tarea
+ 
+-### Planka — API
++| Tarea | Skills a añadir |
++|---|---|
++| Deploy / rollback | `release-orchestrator`, `observability-check` |
++| Incidente cross-layer | `sre-runbook`, `infra-triage`, `n8n-incident-router`, `blocker-escalate` |
++| Cambio Supabase schema | `supabase-schema-governor`, `supabase-qa`, `supabase-types-sync`, `supabase-contract-verifier` |
++| UI nuevo desde cero | `figma-extraction` (AURA), `crawl4ai-design-scraper` (AURA), luego `angular-admin-demo-hardening` (PIXEL) |
++| PR develop → main | `agent-qa-gate` (llamar a NOVA), `release-orchestrator` |
++| Rotación de secretos | `security-rotator`, `security-review` |
+ 
+-**URL:** https://planka.alvarodevrace.tech
+-**Login:** `alvaro@alvarodevrace.tech` — password en `bitwarden:global/planka-password`
+-
+-**Obtener token:**
+-```bash
+-TOKEN=$(curl -s -X POST "https://planka.alvarodevrace.tech/api/access-tokens" \
+-  -H "Content-Type: application/json" \
+-  -d '{"emailOrUsername":"alvaro@alvarodevrace.tech","password":"<BW>"}' \
+-  | python3 -c "import sys,json; print(json.load(sys.stdin).get('item',''))")
+-```
+-
+-**Prefijos ticket:**
+-| Proyecto | Prefijo |
+-|----------|---------|
+-| jauria | JAU-N |
+-| laschubys | LCH-N |
+-| portfolio | PRT-N |
+-| cobroslatam | COB-N |
+-| utilboxes | UTI-N |
+-| agrovivas | AGV-N |
+-
+-**Formato de comentario por agente:**
+-- **TRIN:** `✅ [Qué resolvió]. Commit/acción: [ref].`
+-- **PIXEL:** `✅ Merge en develop. Rama: pixel/<nombre>. [qué cambió]. TRIN: push develop + PR.`
+-- **LINK:** `✅ Workflow <nombre> corregido. Cambio: [nodo/fix]. Evidencia: ejecución <id>.`
+-- **EVA:** `✅ Docs actualizados. Archivos: [lista]. Hallazgo para TRIN: [si aplica].`
+-- **NOVA:** `✅ QA pass. Tests: [lista]. Lighthouse: P/A/S/BP.` o `❌ QA bloqueado. Bugs: [lista].`
+-- **AURA:** `✅ Componente <nombre> listo. Props: [lista]. data-testid incluidos. PIXEL: integrar.`
+-
+ ---
+ 
+-## 7. FLUJO GIT UNIVERSAL
++## 5. Resolución de Conflictos
+ 
+-**Ramas permanentes:** `main` y `develop` — NUNCA push directo.
++- Si una skill existe tanto en User scope (`~/.kimi-code/skills/`) como en proyecto local, **gana la local** para ese proyecto.
++- Si dos skills parecen solaparse (ej. `angular-senior` y `angular-admin-demo-hardening`), usar ambas: `angular-senior` para patrones generales, `angular-admin-demo-hardening` para checklist pre-cierre.
++- Si una skill no aparece en este catálogo, no se inyecta a subagentes hasta que Kimico la revise y registre.
+ 
+-### PIXEL
+-```bash
+-# 1. Siempre partir de develop actualizado
+-git checkout develop && git pull origin develop
+-
+-# 2. Crear rama
+-git checkout -b pixel/<nombre-corto-ticket>
+-
+-# 3. Implementar
+-
+-# 4. Verificar build ANTES de merge
+-npm run build  # debe pasar sin errores
+-
+-# 5. Merge local a develop
+-git checkout develop
+-git merge pixel/<nombre>
+-
+-# 6. Avisar a TRIN (NO push tú mismo)
+-# "Listo en develop local. Rama: pixel/<nombre>. TRIN: push develop + PR + borrar rama."
+-```
+-
+-### TRIN (después de PIXEL)
+-```bash
+-1. gh run list --repo alvarodevrace/<repo>
+-2. git push origin develop
+-3. git branch -D pixel/<nombre> && git push origin --delete pixel/<nombre>
+-4. LLAMAR A NOVA: "QA listo en develop — proyecto <X>. URL staging: <URL>"
+-5. gh pr create --repo alvarodevrace/<repo> \
+-     --base main --head develop --title "<ticket>" \
+-     --body "Ticket: <PRY-XXX>."
+-6. Notificar a Álvaro: "PR listo → <url>"
+-7. Álvaro aprueba → merge → Coolify deploy automático
+-8. Verificar deploy success en Coolify
+-9. Planka → mover ticket a Done
+-```
+-
+-**Reglas absolutas:**
+-- NUNCA push directo a `main`
+-- NUNCA PR feature → main (siempre develop primero)
+-- TRIN nunca aprueba su propio PR
+-- TRIN nunca crea PR sin QA pass de NOVA
+-- **TRIN siempre crea el PR develop→main. Álvaro siempre aprueba — pero la creación del PR es responsabilidad de TRIN**
+-- **SIEMPRE hacer `npm run build` (o equivalente) después de CUALQUIER cambio de código en frontend o backend, antes de commit/push — indistintamente del proyecto**
+-
+ ---
+ 
+-## 8. PROPIEDAD DE AGENTES
++## 6. Skills No Registradas / Obsoletas
+ 
+-| Área | Dueño |
+-|------|-------|
+-| Infra: Coolify, deploys, secretos, RLS, RPC, Supabase schema | KIMI-TRIN |
+-| Orquestación: decide dueño, resuelve bloqueos, handoffs | KIMI-TRIN |
+-| CRM: cotizaciones Notion, contratos Docuseal, hitos | KIMI-TRIN |
+-| Apps: código Angular/NestJS, lógica negocio, API routes | KIMI-PIXEL |
+-| Mobile: Capacitor 7, builds iOS/Android | KIMI-PIXEL |
+-| Automatización: n8n, webhooks, ejecuciones | KIMI-LINK |
+-| Docs: vault, indexing, análisis, Q&A | KIMI-EVA |
+-| Tests: Playwright, Jest, Lighthouse, bug reports | KIMI-NOVA |
+-| UI visual: Figma, design system, tokens, componentes | KIMI-AURA |
++No usar:
++- `agents/AGENTS.md.OBSOLETO`
++- `system/STATE.md`
++- `system/MEMORY.md`
++- `agents/legacy/`
+ 
+-**Reglas de frontera:**
+-- Trabajo fuera de área → no ejecutar. Explicar dueño correcto.
+-- PIXEL/LINK/NOVA/AURA: nunca Coolify, secretos, Supabase schema.
+-- AURA: nunca lógica de negocio, servicios, routing.
+-- NOVA: nunca código productivo. Solo tests.
+-- TRIN: llama a NOVA antes de PR develop→main.
+-- PIXEL: pide componente a AURA antes de UI nuevo desde cero.
+-
+ ---
+ 
+-## 9. PROTOCOLOS ESPECIALES
++## 7. Regla de Skills Nuevas (Memoria Viva)
+ 
+-### Protocol RX (Extended Reasoning)
+-Obligatorio antes de: migraciones DDL, cambios RLS, lógica de pagos, RPCs críticos.
+-
+-```
+-1. DISEÑO: describir cambio e impacto exacto
+-2. PRE-MORTEM: 3 escenarios de fallo
+-3. CONTRATO: cómo verificar éxito
+-→ Solo entonces ejecutar
+-```
+-
+-### Flujo de cierre de sesión (obligatorio para todos)
+-
+-```
+-1. Crear dump: vault/<proyecto>/temp/YYYY-MM-DD-<AGENTE>.md
+-   Contenido: logros, IDs, cambios infra, decisiones, pendientes.
+-2. Planka → comentar ticket + mover a Done si terminado.
+-3. /clear → ÚLTIMO PASO.
+-```
+-
+-**EVA procesa dumps:** `temp/` → `20-Tech/30-Product/` → `00-Index/INDEX.md` → `10-Log/LOG.md` → limpia `temp/`
+-
+-### Ley de Memoria — Vault Central
+-
+-> `system/STATE.md` y `system/MEMORY.md` están MUERTOS. No leer, no editar.
+-
+-**Capas:**
+-```
+-Capa 1 — Raw Sources:  vault/<proyecto>/temp/ (dumps de agentes — inmutables hasta EVA)
+-Capa 2 — The Wiki:     vault/<proyecto>/20-Tech/ y 30-Product/ (EVA indexa)
+-Capa 3 — The Schema:   agents/KIMI-AGENTS.md (este archivo)
+-```
+-
+-### Detección de proyecto por CWD
+-
+-```
+-.../JauriaCrossfit/ → jauria   | .../LasChubys/   → laschubys
+-.../Portfolio/      → portfolio | .../CobrosLatam/ → cobroslatam
+-.../UtilBoxes/      → utilboxes | .../Agrovivas/   → agrovivas
+-.../AgentOffice/    → agentoffice
+-```
+-
+----
+-
+-## 10. HERRAMIENTAS Y APIs FRECUENTES
+-
+-### Deploy manual de emergencia (Coolify)
+-```bash
+-curl -X POST -H "Authorization: Bearer $COOLIFY_API_TOKEN" \
+-  "https://coolify.alvarodevrace.tech/api/v1/deploy?uuid=<COOLIFY_UUID>"
+-```
+-
+-### Docuseal — Nueva firma
+-```bash
+-curl -X POST "https://docuseal.alvarodevrace.tech/api/submissions" \
+-  -H "X-Auth-Token: $DOCUSEAL_API_KEY" -H "Content-Type: application/json" \
+-  -d '{"template_id":2,"send_email":true,"submitters":[{"role":"Client","email":"<EMAIL>","name":"<NOMBRE>"}]}'
+-```
+-Template ID: 2 | Slug: mPkXkD7iTpQEWo
+-
+-### PDF Cotización (Gotenberg)
+-```bash
+-curl -s -F "files=@/tmp/index.html;type=text/html;filename=index.html" \
+-  -F "chromium-print-background=true" \
+-  https://gotenberg.alvarodevrace.tech/forms/chromium/convert/html \
+-  -o /tmp/cotizacion_CLIENTE.pdf
+-```
+-Template: `templates/pdf/cotizacion.html`
+-
+-### Crawl4AI — Scraping
+-```bash
+-curl -X POST https://crawl4ai.alvarodevrace.tech/crawl \
+-  -H "Content-Type: application/json" \
+-  -d '{"urls":["<URL>"],"crawler_params":{"headless":true,"screenshot":true}}'
+-```
+-
+-### n8n API
+-```bash
+-# Listar workflows
+-curl -s "https://n8n.alvarodevrace.tech/api/v1/workflows" \
+-  -H "X-N8N-API-KEY: $N8N_API_KEY"
+-
+-# Activar/desactivar workflow
+-curl -X POST "https://n8n.alvarodevrace.tech/api/v1/workflows/<ID>/activate" \
+-  -H "X-N8N-API-KEY: $N8N_API_KEY"
+-```
+-
+----
+-
+-## 11. REGLA DE SKILLS NUEVAS (MEMORIA VIVA)
+-
+ **Si un agente descubre, consulta o necesita una skill que no existe aún → debe crearla inmediatamente.**
+ 
+ ### Proceso
+ 1. **Detectar gap:** patrón recurrente, bug nuevo, proceso operativo no documentado, pregunta repetida.
+ 2. **Decidir scope:**
+    - **Global** (varios proyectos/agentes) → `~/.kimi-code/skills/kimi-<nombre>.md`
+-   - **Local** (un proyecto) → `<proyecto>/.codex/skills/<nombre>/SKILL.md` o `<proyecto>/.claude/skills/<nombre>.md`
++   - **Local** (un proyecto) → `<proyecto>/.kimi/skills/<nombre>/SKILL.md` o `<proyecto>/.kimi/skills/<nombre>.md`
+ 3. **Escribir skill:** instrucciones claras, ejemplos, anti-patrones, cuándo usar.
+-4. **Registrar:** añadir a `vault/alvarodevrace/20-Tech/KIMI-SKILLS-MASTER.md` y a `kimi-all-skills-catalog.md`.
++4. **Registrar:** añadir a este catálogo y a `~/.kimi-code/skills/kimi-all-skills-catalog.md`.
+ 5. **Asignar agente:** decidir quién la usa (TRIN, PIXEL, LINK, NOVA, EVA, AURA).
+ 6. **Reportar:** al cerrar sesión, incluir *"Skill creada: `<nombre>` → agente `<X>`"* en el dump.
+ 
+@@ -515,14 +195,10 @@
+ - Nunca dejar un aprendizaje nuevo solo en memoria de sesión.
+ - El catálogo de skills nunca está terminado.
+ 
+----
++## 8. Mantenimiento
+ 
+-## 12. MEMORIA MUERTA (NO USAR)
+-
+-- `CLAUDE.md.OBSOLETO`
+-- `ANTIGRAVITY.md.OBSOLETO`
+-- `agents/AGENTS.md.OBSOLETO`
+-- `system/STATE.md`
+-- `system/MEMORY.md`
+-
+-**Fuente de verdad:** `KIMI.md` + `agents/KIMI-AGENTS.md` + `vault/<proyecto>/00-Index/INDEX.md` + `kimi-all-skills-catalog.md` + **este archivo**
++Cada vez que se cree una skill nueva en `~/.kimi-code/skills/` o `<proyecto>/.kimi/skills/`, se debe:
++1. Añadir a este catálogo y a `kimi-all-skills-catalog.md`.
++2. Asignar agente owner.
++3. Actualizar la sección de inyección si aplica.
++4. Notificar a Álvaro en el cierre de sesión.
