@@ -9,18 +9,18 @@ Automatizaciones y flujos de trabajo activos para Las Chubys.
 - Schema: `laschubys` (PostgREST: `Accept-Profile: laschubys`)
 - Infra global: `vault/INFRA-GLOBAL-2026-06.md`
 
-## 🛠️ Workflows Activos (6)
+## 🛠️ Workflows Activos (8)
 
-| Workflow | ID | Trigger | Propósito |
-| --- | --- | --- | --- |
-| `OPS / Infra / Alertas` | `BFsLIVWRC0B3IP6K` | Webhook `POST /webhook/infra-alert` | Alertas de infra hacia Telegram AlvaroDevRace |
-| `OPS / Infra / Resource Alert` | `DhTLEpls5Djq94rE` | Webhook `POST /webhook/infra-resource-alert` | Alertas de recursos del VPS hacia Telegram AlvaroDevRace |
-| `LCH / Sentry / Alert` | `75uNLt9LI5PHLUiG` | Webhook `POST /webhook/lch-sentry-alert` | Alertas Sentry app/api → Telegram Las Chubys |
-| `LCH / Infra / Keepalive` | `nmqhJawyIvV8aOIt` | Cron + webhook `lch-keepalive-run` | Ping a `laschubys.com` |
-| `LCH / Operaciones / Error handler` | `R8sYRPKvdNBKLEKX` | `n8n-nodes-base.errorTrigger` | Recibe fallos de workflows LCH y notifica por Telegram Las Chubys |
-| `WF-LCH-META-SYNC` | `ljRaQeAsfs43Mkme` | Schedule diario 06:00 UTC | Sync followers Meta (IG + FB) → `laschubys.social_metrics` |
-| `LCH / Backup / General` | `7MVk9RSekCVvyhCT` | Schedule diario + webhook `lch-backup-run` | Backup workflows n8n a GitHub `alvarodevrace/laschubys-backups` |
-| `LCH / Backup / Supabase` | `bzhKoL4anHcO0ysE` | Schedule diario + webhook `lch-supabase-backup-run` | Backup schema `laschubys` a GitHub + Google Drive |
+| Workflow | ID | Trigger | Propósito | Estado |
+| --- | --- | --- | --- | --- |
+| `OPS / Infra / Alertas` | `BFsLIVWRC0B3IP6K` | Webhook `POST /webhook/infra-alert` | Alertas de infra hacia Telegram AlvaroDevRace | ✅ |
+| `OPS / Infra / Resource Alert` | `DhTLEpls5Djq94rE` | Webhook `POST /webhook/infra-resource-alert` | Alertas de recursos del VPS hacia Telegram AlvaroDevRace | ✅ |
+| `LCH / Sentry / Alert` | `75uNLt9LI5PHLUiG` | Webhook `POST /webhook/lch-sentry-alert` | Alertas Sentry app/api → Telegram Las Chubys | ⏳ Pendiente recrear |
+| `LCH / Infra / Keepalive` | `nmqhJawyIvV8aOIt` | Cron + webhook `lch-keepalive-run` | Ping a `laschubys.com` | ✅ |
+| `LCH / Operaciones / Error handler` | `R8sYRPKvdNBKLEKX` | `n8n-nodes-base.errorTrigger` | Recibe fallos de workflows LCH y notifica por Telegram Las Chubys | ✅ |
+| `WF-LCH-META-SYNC` | `ljRaQeAsfs43Mkme` | Schedule diario 06:00 UTC | Sync followers Meta (IG + FB) → `laschubys.social_metrics` | ✅ |
+| `LCH / Backup / General` | `7MVk9RSekCVvyhCT` | Schedule diario + webhook `lch-backup-run` | Backup workflows n8n a GitHub `alvarodevrace/laschubys-backups` | ✅ |
+| `LCH / Backup / Supabase` | `bzhKoL4anHcO0ysE` | Schedule diario + webhook `lch-supabase-backup-run` | Backup schema `laschubys` a GitHub + Google Drive | ✅ |
 
 > **Eliminados 2026-07-10:** `WF-LCH-SEO-01`, `LCH / Reportes / Notify`, `LCH / Infra / Alertas` (duplicado), `LCH / Notificaciones / Comment notify`. No se usaban en ≥1 mes o estaban huérfanos.
 

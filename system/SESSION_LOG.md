@@ -2,6 +2,15 @@
 
 ---
 
+## [2026-07-28 15:10] KIMICO — Incidente backups n8n por volumen PostgreSQL mal montado
+
+**Hecho:** Diagnóstico y recuperación de backups. Servicio `postgres-index-multi-byte-alarm-orbypg` montaba volumen en `/var/lib/postgresql/18/docker` mientras `PGDATA` apuntaba a `/var/lib/postgresql/data`; PostgreSQL usaba volumen anónimo que se perdió el 2026-07-26. DB restaurada desde dump 2026-07-25, mountPath corregido en Dokploy DB (`F2uMnR14dUEvYzdYF8WFR`), servicio redeployado. Script sync Dell actualizado (sin Coolify, sin credentials.sqlite, con Dokploy config y n8n-db). Backup manual y sync VPS→Drive→Dell validados.
+**Pendiente:** Revisar otros Postgres de Dokploy por mountPath desalineado; considerar alerta ante errores de backup.
+**Bloqueo:** Ninguno.
+**Notas:** n8n OK con 8 workflows activos. Ticket Planka `1829218866606114297` en Done. Dump en `vault/infra/temp/2026-07-28-TRIN.md`.
+
+---
+
 ## [2026-06-24 04:55] KIMICO — Migración Coolify → Dokploy: día 1
 
 **Hecho:** Instalado Dokploy `v0.29.8` en VPS Hostinger, dominio base `dokploy.alvarodevrace.tech` configurado vía Cloudflare Tunnel, API key guardada en Bitwarden. Proyecto `infra` creado y Uptime Kuma migrado con éxito; `status.alvarodevrace.tech` responde.

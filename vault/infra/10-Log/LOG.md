@@ -1,5 +1,29 @@
 # LOG — Infraestructura Global
 
+## [2026-07-28] KIMICO | Incidente: backups n8n fallaron 3 días por volumen PostgreSQL mal montado
+
+**Agente:** KIMICO (TRIN)
+**Contexto:** Álvaro reportó que no se habían sacado respaldos los últimos 3 días. Revisión mostró que backups Supabase seguían OK, pero backups de n8n workflows y PostgreSQL fallaban desde 2026-07-26.
+**Tareas:**
+- Diagnosticada causa raíz: servicio `postgres-index-multi-byte-alarm-orbypg` de Dokploy montaba el volumen persistente en `/var/lib/postgresql/18/docker`, pero la imagen `postgres:16` usa `PGDATA=/var/lib/postgresql/data`. PostgreSQL ignoraba el volumen persistente, creaba un volumen anónimo en `/var/lib/postgresql/data`, y ese volumen anónimo se perdió al recrear el container el 2026-07-26.
+- Restaurada DB n8n desde dump `n8n-db-20260725.sql` (54 tablas, 8 workflows).
+- Corregido `mountPath` en tabla `mount` de Dokploy (`F2uMnR14dUEvYzdYF8WFR`) de `/var/lib/postgresql/18/docker` a `/var/lib/postgresql/data`; redeploy vía API de Dokploy.
+- Backup del volumen anónimo previo guardado en `/opt/backups/n8n-postgres-anon-volume-20260728-0947.tar.gz`.
+- Re-ejecutado backup manual VPS: Supabase, n8n workflows y n8n PostgreSQL OK; sync a Google Drive OK.
+- Corregido script `/opt/scripts/sync-backups.sh` en Dell: eliminadas referencias a Coolify (`/data/coolify/`) y `credentials-*.sqlite`; añadido sync de Dokploy config (`/opt/dokploy-data/`) y verificación de `n8n-db-*.sql`.
+- Sync manual Dell OK: backups críticos verificados en `/opt/backups/vps/`.
+**Verificación post-cambio:**
+- `docker service inspect postgres-index-multi-byte-alarm-orbypg` → mount único en `/var/lib/postgresql/data`.
+- n8n responde, 8 workflows activos, API devuelve workflows.
+- Backup cron y sync Dell/Google Drive validados.
+**Bloqueos:** Ninguno.
+**Pendientes:**
+- Revisar si otros servicios Postgres de Dokploy tienen mountPath similarmente desalineado.
+- Considerar alerta explícita si backup-generate.sh reporta errores.
+**Vault lint:** ✅ sin secretos expuestos.
+
+---
+
 ## [2026-07-12] KIMICO | Cerrados PRs de Dependabot y reconfigurado para evitar migraciones mayores automáticas
 
 **Agente:** KIMICO (TRIN)

@@ -1,5 +1,28 @@
 # LOG — AlvaroDevRace (Sistema Freelancer)
 
+## [2026-07-21] TRIN | Auditoría multi-IA + diseño de `kimico-system`
+
+**Agente:** TRIN
+**Ambiente:** dev
+**Tareas:**
+- Auditoría comparativa entre sistema AlvaroDevRace y Gentleman Programming AI (GitHub).
+- Investigación de repos Gentleman: `gentle-ai`, `engram`, `gentle-pi`, `Gentleman-Skills`.
+- Auditoría interna: skills duplicadas, agentes, vault, infra, Engram.
+- Definición de repo público `kimico-system`: kit portable multi-IA (Kimi + Claude) con agentes, skills, memoria Engram y vault template.
+- Escritura de design spec en `docs/superpowers/specs/2026-07-21-kimico-system-design.md`.
+**Commits:** Ninguno (solo planificación).
+**PRs:** Ninguno.
+**Deploys:** N/A.
+**Smoke test:** N/A.
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Revisar y aprobar design spec.
+- Iniciar Fase 1: limpieza de skills/catálogo en AlvaroDevRace.
+- Crear repo `github.com/alvarodevrace/kimico-system`.
+**Vault lint:** N/A.
+
+---
+
 ## [2026-07-21] TRIN | Incidente VPS Hostinger caído + watchdog local macOS
 
 **Agente:** TRIN
