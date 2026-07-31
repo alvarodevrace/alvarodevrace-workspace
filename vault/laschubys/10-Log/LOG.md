@@ -3,6 +3,34 @@
 Registro append-only. Formato: `## [YYYY-MM-DD] [AGENTE] | operación`
 Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 
+## [2026-07-30] KIMICO | Rediseño home: ondas, media kit y tipografía
+
+**Agente:** KIMICO (TRIN)
+**Ambiente:** dev
+**Tareas:**
+- Unificación de separadores de onda en todo el home con nuevo SVG suave.
+- Sustitución del cursor personalizado por cursor del sistema.
+- Fondo de secciones warm cambiado a `#fcf5ea` vía token `--color-surface`.
+- Fondos de cards de protagonistas cambiados a blanco.
+- Nueva sección "Las Chubys en cifras" con estadísticas de redes, iconos Lucide, valores en Poppins Bold.
+- Todos los títulos de sección del home centrados con icono + subtítulo.
+- Puntos del banner reposicionados sobre la onda y en naranja para visibilidad.
+**Commits:**
+- Front: `0dc0897` — `feat(home): ondas unificadas, media kit, tipografía Poppins y fondos #fcf5ea`
+- Back: sin cambios.
+**PRs:** Ninguno — cambios pusheados directamente a `develop`.
+**Deploys:** N/A.
+**Smoke test:** N/A.
+**Bloqueos:** Ninguno.
+**Pendientes mañana:**
+- Continuar rediseño global: reducir exceso de naranja en botones/links/títulos.
+- Auditar y mejorar tienda y páginas estáticas.
+- Integrar inspiración de edgardcooper.com (efectos/sliders).
+- Revisar unificación de cards y efectos hover.
+**Vault lint:** ✅ sin issues.
+
+---
+
 ## [2026-07-24] KIMICO | Linktree Huellas de Paz + deploys front/back
 
 **Agente:** KIMICO (TRIN)
@@ -81,14 +109,9 @@ Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 - Internal integration Sentry `LCH Telegram Webhook` instalada y apuntando a `https://n8n.alvarodevrace.tech/webhook/lch-sentry-alert`.
 - Redeploy forzado de `laschubys-app` vía API Dokploy para aplicar CSP con Sentry origin y `worker-src 'self' blob:`.
 - Verificación en producción: `https://laschubys.com` responde 200; header CSP incluye Sentry y `worker-src blob:`.
-- Cerrados PRs automáticos de Dependabot (Angular 22, TypeScript 7, `@types/node` 26, etc.) en front y back.
-- Reconfigurado `.github/dependabot.yml` en front y back: solo parches/menores agrupados mensualmente, sin migraciones mayores automáticas.
 - Mergeados a `main`:
   - `alvarodevrace/laschubys-app#51` — CSP Sentry + infra fixes.
-  - `alvarodevrace/laschubys-api#39` — reconfiguración Dependabot.
-**Commits:**
-- `LasChubys-Front`: `chore(ci): restringir Dependabot a parches/menores agrupados mensualmente` (`f49537d`).
-- `LasChubys-Back`: `chore(ci): restringir Dependabot a parches/menores agrupados mensualmente` (`0ef9b5c`).
+  - `alvarodevrace/laschubys-api#39` — infra fixes.
 **PRs:** `laschubys-app#51` MERGED, `laschubys-api#39` MERGED.
 **Bloqueos:** Ninguno.
 **Pendientes:**
@@ -98,7 +121,7 @@ Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 
 ---
 
-## [2026-07-12] KIMICO | Production readiness: n8n workflows, dependabot, runbook, diagrama
+## [2026-07-12] KIMICO | Production readiness: n8n workflows, runbook, diagrama
 
 **Agente:** KIMICO (LINK + EVA)
 **Tareas:**
@@ -106,13 +129,9 @@ Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
   - `LCH / Contact / Notify` → `vault/laschubys/20-Tech/n8n/workflows/LCH-Contact-Notify.json`
   - `OPS / Infra / Resource Alert` → `vault/laschubys/20-Tech/n8n/workflows/OPS-Resource-Alert.json`
 - Añadida `N8N_WEBHOOK_URL` a `LasChubys-Back/.env.example`.
-- Creada configuración Dependabot en frontend y backend (`.github/dependabot.yml`).
 - Creado runbook de producción: `vault/laschubys/20-Tech/RUNBOOK-LCH.md`.
 - Creado diagrama de arquitectura: `vault/laschubys/20-Tech/Architecture.md`.
 - Actualizado `vault/laschubys/00-Index/INDEX.md` con links a nuevos documentos.
-**Commits:**
-- `LasChubys-Front`: `chore(front): add dependabot config`
-- `LasChubys-Back`: `chore(back): add dependabot config and N8N_WEBHOOK_URL example`
 **PRs:** Ninguno — pendientes de push/PR a `main`.
 **Bloqueos:**
 - Importación de workflows a n8n vía API no realizada por falta de `N8N_API_KEY` (no en entorno; Bitwarden bloqueado).
@@ -627,4 +646,28 @@ Logs diarios anteriores → `archive/` (2026-04-27, 2026-04-28, 2026-04-29)
 - Crear PR front con cambios de navigation.
 - Recrear workflow `LCH / Sentry / Alert` en n8n.
 - Verificar que cron diario de backups VPS siga generando sin errores.
+**Vault lint:** ✅ sin issues.
+
+---
+
+## 2026-07-30 — Banner, header móvil y limpieza home
+
+**Agente:** TRIN
+**Ambiente:** dev
+**Tareas:**
+- Copiar 4 imágenes de banner desde `Downloads/BANNES PAG WEB` a `public/images/banner-{1..4}.png`.
+- Actualizar carrusel del home a 4 slides clickeables: `/about`, `/tienda`, `/blog`, `/contact`.
+- Ajustar header móvil: píldora con bordes redondeados, iconos de carrito y menú alineados a la derecha.
+- Eliminar sección de 3 cards debajo del banner en móvil y desktop.
+- Limpiar imports de iconos huérfanos en `home.component.ts`.
+**Commits:** cambios locales unstaged en `LasChubys-Front` rama `develop`.
+**PRs:** ninguno creado.
+**Deploys:** N/A.
+**Smoke test:** N/A.
+**Bloqueos:**
+- Workflow `LCH / Sentry / Alert` aún no restaurado (pendiente desde 2026-07-20).
+**Pendientes mañana:**
+- Crear PR front con banner clickeable + header móvil + eliminación de cards.
+- Recrear workflow `LCH / Sentry / Alert` en n8n.
+- Verificar cron diario de backups VPS.
 **Vault lint:** ✅ sin issues.
